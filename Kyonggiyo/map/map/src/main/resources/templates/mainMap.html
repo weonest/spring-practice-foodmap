@@ -91,7 +91,7 @@
                     color: #4df804;
                 }
 
-                .smP{
+                .smP {
                     margin: 0px;
                     padding: 0px 8px 0px 32px;
                     text-decoration: none;
@@ -124,8 +124,8 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a class="openSn" onclick="openSn()" href="#">전체목록</a>
-            <a href="#">서울캠퍼스</a>
+            <a class="openSn" onclick="openSn()" href="#">수원캠퍼스</a>
+            <a class="openSn" onclick="openSn()" href="#">서울캠퍼스</a>
             <a href="#">준비중</a>
             <a href="#">준비중</a>
         </div>
@@ -133,18 +133,32 @@
         <div id="smSidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSn()">&times;</a>
             <script th:inline="javascript">
+                var cnt = 0;
                 for (var i = 0; i < [[${maps}]].length; i++) {
-                    document.write('<a href="#" onclick="getClickHandler()">' +
+                    document.write('<a id ="smT" href="#" onclick="move()">' +
                         '<img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" width="20px">' +
-                        ''+[[${maps}]][i].name+'</a>')
-                    document.write('<p class="smP" href="#" style="font-size: 14px">'+[[${maps}]][i].des+'</p>')
+                        '' + [[${maps}]][i].name + '</a>')
+
+                    document.write('<p class="smP" href="#" style="font-size: 14px">' + [[${maps}]][i].des + '</p>')
                     document.write('<p class="smP" href="#" style="font-size: 14px">' +
                         '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="16">' +
-                        ''+[[${maps}]][i].star+'</p><br>')
-                    if(i == [[${maps}]].length-1){
+                        '' + [[${maps}]][i].star + '</p><br>')
+
+                    if (i == [[${maps}]].length - 1) {
                         document.write('<p><br><br><br></p>')
                     }
+
+                    function move() {
+                        var pos = getArr();
+                        var marker = pos[cnt];
+                        console.log(pos.length);
+                        console.log(marker);
+                        console.log(i);
+                        map.panTo(marker);
+                        cnt++;
+                    }
                 }
+
 
             </script>
         </div>
@@ -158,7 +172,6 @@
 </div>
 
 <script th:inline="javascript">
-
 
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(37.3006759, 127.035805),
@@ -192,14 +205,6 @@
             '</p></div>' +
             '</div>',
         ].join('');
-
-        var sideString = [
-            '<div class="sideSt">' +
-            name + '<br>'  +
-            des + '<br>' +
-            star +
-            '</div>'
-            ].join('');
 
         var marker = new naver.maps.Marker({
             map: map,
@@ -264,11 +269,21 @@
             } else {
                 infoWindow.open(map, marker);
             }
-
             var pos = marker.getPosition();
             map.panTo(pos);
+            console.log(pos)
 
         }
+    }
+
+    function getArr() {
+        var arr = [];
+        for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i];
+            var loc = marker.getPosition();
+            arr.push(loc);
+        }
+        return arr;
     }
 
     for (var i = 0, ii = markers.length; i < ii; i++) {
