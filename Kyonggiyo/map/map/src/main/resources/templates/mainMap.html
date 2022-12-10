@@ -134,6 +134,7 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeSn()">&times;</a>
             <script th:inline="javascript">
                 var cnt = 0;
+                var arr2 = [];
                 for (var i = 0; i < [[${maps}]].length; i++) {
                     document.write('<a id ="smT" href="#" onclick="move()">' +
                         '<img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" width="20px">' +
@@ -143,22 +144,29 @@
                     document.write('<p class="smP" href="#" style="font-size: 14px">' +
                         '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="16">' +
                         '' + [[${maps}]][i].star + '</p><br>')
-
                     if (i == [[${maps}]].length - 1) {
                         document.write('<p><br><br><br></p>')
                     }
+                    var element = document.createElement("a");
+                    element.id="smT"+i++;
+                    element.text = [[${maps}]][i].name;
+                    var foo = document.getElementById("smSidenav");
+                    foo.appendChild(element);
 
-                    function move() {
-                        var pos = getArr();
-                        var marker = pos[cnt];
-                        console.log(pos.length);
-                        console.log(marker);
-                        console.log(i);
-                        map.panTo(marker);
-                        cnt++;
-                    }
                 }
+                document.getElementById(element.id).addEventListener('click', move());
 
+                function move() {
+                    return function (e) {
+                        if(cnt == 12){
+                            return;
+                        }
+                        var pos = getArr();
+                        console.log(pos);
+                        map.panTo(pos[cnt]);
+                        cnt++;
+                    };
+                }
 
             </script>
         </div>
@@ -271,10 +279,10 @@
             }
             var pos = marker.getPosition();
             map.panTo(pos);
-            console.log(pos)
 
         }
     }
+
 
     function getArr() {
         var arr = [];
