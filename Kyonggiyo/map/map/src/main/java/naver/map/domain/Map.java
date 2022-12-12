@@ -22,7 +22,7 @@ public class Map {
                 ", des='" + des + '\'' +
                 ", star=" + star +
                 ", sum='" + sum + '\'' +
-                ", ab=" + ab +
+                ", where=" + where +
                 '}';
     }
 
@@ -32,7 +32,7 @@ public class Map {
     private String des;
     private double star;
     private String sum;
-    private Long ab;
+    private Long where;
 
     public String getName() {
         return name;
@@ -82,11 +82,11 @@ public class Map {
         this.sum = sum;
     }
 
-    public Long getAb() {
-        return ab;
+    public Long getwhere() {
+        return where;
     }
 
-    public void setAb(Long ab) {
-        this.ab = ab;
+    public void setwhere(Long where) {
+        this.where = where;
     }
 }
