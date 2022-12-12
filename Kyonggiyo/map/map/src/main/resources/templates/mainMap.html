@@ -136,9 +136,23 @@
                 var cnt = 0;
                 var arr2 = [];
                 for (var i = 0; i < [[${maps}]].length; i++) {
-                    document.write('<a id ="smT" href="#" onclick="move()">' +
-                        '<img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" width="20px">' +
-                        '' + [[${maps}]][i].name + '</a>')
+                    // document.write('<a id ="smT" href="#">' +
+                    //     '<img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" width="20px">' +
+                    //     '' + [[${maps}]][i].name + '</a>')
+                    var element = document.createElement("a");
+                    element.href = "#";
+                    element.id = "smT" + cnt++;
+                    arr2.push(element.id);
+                    element.text = [[${maps}]][i].name;
+
+                    var img = document.createElement("img");
+                    img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+                    img.setAttribute("width", "20");
+                    img.setAttribute("height", "20");
+                    element.prepend(img);
+
+                    var smSidenav = document.getElementById("smSidenav");
+                    smSidenav.appendChild(element);
 
                     document.write('<p class="smP" href="#" style="font-size: 14px">' + [[${maps}]][i].des + '</p>')
                     document.write('<p class="smP" href="#" style="font-size: 14px">' +
@@ -147,24 +161,25 @@
                     if (i == [[${maps}]].length - 1) {
                         document.write('<p><br><br><br></p>')
                     }
-                    var element = document.createElement("a");
-                    element.id="smT"+i++;
-                    element.text = [[${maps}]][i].name;
-                    var foo = document.getElementById("smSidenav");
-                    foo.appendChild(element);
 
                 }
-                document.getElementById(element.id).addEventListener('click', move());
+                for (var i = 0, ii = [[${maps}]].length; i < ii; i++)
+                    document.getElementById(arr2[i]).addEventListener('click', move(i));
 
-                function move() {
+                function move(seq) {
                     return function (e) {
-                        if(cnt == 12){
-                            return;
+                        var gMarkers = getMarkers();
+                        var gInfoWindow = getInfoWindows();
+                        var marker = gMarkers[seq];
+                        var infowindow = gInfoWindow[seq];
+
+                        if (infowindow.getMap()) {
+                            infowindow.close();
+                        } else{
+                            infowindow.open(map, marker)
                         }
-                        var pos = getArr();
-                        console.log(pos);
-                        map.panTo(pos[cnt]);
-                        cnt++;
+                        var pos = marker.getPosition();
+                        map.panTo(pos);
                     };
                 }
 
@@ -279,19 +294,24 @@
             }
             var pos = marker.getPosition();
             map.panTo(pos);
-
         }
     }
 
+    function getInfoWindows() {
+        return infoWindows;
+    }
 
-    function getArr() {
-        var arr = [];
-        for (var i = 0; i < markers.length; i++) {
-            var marker = markers[i];
-            var loc = marker.getPosition();
-            arr.push(loc);
-        }
-        return arr;
+    function getMarkers() {
+        // var arr = [];
+        // for (var i = 0; i < markers.length; i++) {
+        //     var marker = markers[i];
+        //     var loc = marker.getPosition();
+        //     arr.push(loc);
+        // }
+        // console.log(arr);
+        // console.log(markers);
+        // return arr;
+        return markers;
     }
 
     for (var i = 0, ii = markers.length; i < ii; i++) {
