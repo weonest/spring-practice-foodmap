@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
     <meta charset="utf-8">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,10 +53,18 @@
     }
 
     </style>
+<!--        <script type="text/javascript">-->
+<!--            $(document).ready(function () {-->
+<!--                var i = 1;-->
+<!--                $("#smSidenav").load("style2.js");-->
+<!--                console.log(i)-->
+<!--            });-->
+<!--        </script>-->
 </head>
 <body>
 
 <div id="map" style="width:100%;height:900px;">
+
     <div id="side">
         <head>
             <style>
@@ -106,7 +117,7 @@
                     top: 0;
                     right: 25px;
                     font-size: 36px;
-                    margin-left: 50px;
+                    margin-left: 80px;
                 }
 
                 @media screen and (max-height: 450px) {
@@ -122,28 +133,28 @@
         </head>
         <body>
 
+<!--        네비게이션 -->
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a class="openSn" onclick="openSn()" href="#">수원캠퍼스</a>
-            <a class="openSn" onclick="openSn()" href="#">서울캠퍼스</a>
+            <a onclick="openSu()" href="#">수원캠퍼스</a>
+            <a onclick="openSe()" href="#">서울캠퍼스</a>
             <a href="#">준비중</a>
             <a href="#">준비중</a>
         </div>
 
-        <div id="smSidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeSn()">&times;</a>
+<!--        수원 리스트-->
+        <div id="suSidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSu()">&times;</a>
             <script th:inline="javascript">
-                var cnt = 0;
-                var arr2 = [];
+                var suCnt = 0;
+                var suArr = [];
                 for (var i = 0; i < [[${maps}]].length; i++) {
                     if ([[${maps}]][i].where == 0) {
-                        // document.write('<a id ="smT" href="#">' +
-                        //     '<img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" width="20px">' +
-                        //     '' + [[${maps}]][i].name + '</a>')
+
                         var element = document.createElement("a");
                         element.href = "#";
-                        element.id = "smT" + cnt++;
-                        arr2.push(element.id);
+                        element.id = "smT" + suCnt++;
+                        suArr.push(element.id);
                         element.text = [[${maps}]][i].name;
 
                         var img = document.createElement("img");
@@ -152,8 +163,8 @@
                         img.setAttribute("height", "20");
                         element.prepend(img);
 
-                        var smSidenav = document.getElementById("smSidenav");
-                        smSidenav.appendChild(element);
+                        var suSidenav = document.getElementById("suSidenav");
+                        suSidenav.appendChild(element);
 
                         document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${maps}]][i].des + '</p>')
                         document.write('<p class="smP" href="#" style="font-size: 14px">' +
@@ -163,34 +174,48 @@
                             document.write('<p><br><br><br></p>')
                         }
                     }
-
                 }
-
-                for (var i = 0, ii = [[${maps}]].length; i < ii; i++)
-                    document.getElementById(arr2[i]).addEventListener('click', ListHandler(i));
-
-                function ListHandler(seq) {
-                    return function (e) {
-                        var gMarkers = getMarkers();
-                        var gInfoWindow = getInfoWindows();
-                        var marker = gMarkers[seq];
-                        var infowindow = gInfoWindow[seq];
-
-                        if (infowindow.getMap()) {
-                            infowindow.close();
-                        } else {
-                            infowindow.open(map, marker)
-                        }
-                        var pos = marker.getPosition();
-                        map.panTo(pos);
-                    };
-                }
-
             </script>
         </div>
 
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img
-                src="https://cdn-icons-png.flaticon.com/512/9073/9073147.png" height="50" width="50" Menu></span>
+<!--        서울 리스트-->
+        <div id="seSidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSe()">&times;</a>
+            <script th:inline="javascript">
+                var seCnt = 0;
+                var seArr = [];
+                for (var i = 0; i < [[${maps}]].length; i++) {
+                    if ([[${maps}]][i].where == 1) {
+
+                        var element = document.createElement("a");
+                        element.href = "#";
+                        element.id = "seT" + seCnt++;
+                        seArr.push(element.id);
+                        element.text = [[${maps}]][i].name;
+
+                        var img = document.createElement("img");
+                        img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+                        img.setAttribute("width", "20");
+                        img.setAttribute("height", "20");
+                        element.prepend(img);
+
+                        var seSidenav = document.getElementById("seSidenav");
+                        seSidenav.appendChild(element);
+
+                        document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${maps}]][i].des + '</p>')
+                        document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                            '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                            '' + [[${maps}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${maps}]][i].sum + '</p><br>')
+                        if (i == [[${maps}]].length - 1) {
+                            document.write('<p><br><br><br></p>')
+                        }
+                    }
+                }
+            </script>
+        </div>
+
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+            <img src="https://cdn-icons-png.flaticon.com/512/9073/9073147.png" height="50" width="50" Menu></span>
 
         </body>
     </div>
@@ -247,7 +272,8 @@
         });
         markers.push(marker);
         infoWindows.push(infowindow)
-    };
+    }
+    ;
 
     naver.maps.Event.addListener(map, 'idle', function () {
         updateMarkers(map, markers);
@@ -314,16 +340,46 @@
         document.getElementById("mySidenav").style.width = "250px";
     }
 
-    function openSn() {
-        document.getElementById("smSidenav").style.width = "300px";
+    function openSu() {
+        document.getElementById("suSidenav").style.width = "300px";
+    }
+    function openSe() {
+        document.getElementById("seSidenav").style.width = "300px";
     }
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
 
-    function closeSn() {
-        document.getElementById("smSidenav").style.width = "0";
+    function closeSu() {
+        document.getElementById("suSidenav").style.width = "0";
+    }
+
+    function closeSe() {
+        document.getElementById("seSidenav").style.width = "0";
+    }
+
+    for (var i = 0, ii = [[${maps}]].length; i < ii; i++){
+        document.getElementById(suArr[i]).addEventListener('click', ListHandler(i));
+    }
+    for (var i = 0, ii = [[${maps}]].length; i < ii; i++){
+        document.getElementById(seArr[i]).addEventListener('click', ListHandler(i));
+    }
+
+    function ListHandler(seq) {
+        return function (e) {
+            var gMarkers = getMarkers();
+            var gInfoWindow = getInfoWindows();
+            var marker = gMarkers[seq];
+            var infowindow = gInfoWindow[seq];
+
+            if (infowindow.getMap()) {
+            } else {
+                infowindow.open(map, marker)
+            }
+            var pos = marker.getPosition();
+            map.panTo(pos);
+        };
     }
 
 </script>
