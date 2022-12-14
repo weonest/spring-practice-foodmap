@@ -13,6 +13,7 @@ public interface MapRepository {
     Optional<Map> findByY(double y);
     Optional<Map> findBywhere(long where);
 
+    List<Map> getCampus(long where);
     List<Map> findAll();
 
 }

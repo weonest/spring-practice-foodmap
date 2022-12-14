@@ -53,13 +53,13 @@
     }
 
     </style>
-<!--        <script type="text/javascript">-->
-<!--            $(document).ready(function () {-->
-<!--                var i = 1;-->
-<!--                $("#smSidenav").load("style2.js");-->
-<!--                console.log(i)-->
-<!--            });-->
-<!--        </script>-->
+    <!--        <script type="text/javascript">-->
+    <!--            $(document).ready(function () {-->
+    <!--                var i = 1;-->
+    <!--                $("#smSidenav").load("style2.js");-->
+    <!--                console.log(i)-->
+    <!--            });-->
+    <!--        </script>-->
 </head>
 <body>
 
@@ -133,7 +133,7 @@
         </head>
         <body>
 
-<!--        네비게이션 -->
+        <!--        네비게이션 -->
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a onclick="openSu()" href="#">수원캠퍼스</a>
@@ -142,73 +142,70 @@
             <a href="#">준비중</a>
         </div>
 
-<!--        수원 리스트-->
+        <!--        수원 리스트-->
         <div id="suSidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSu()">&times;</a>
             <script th:inline="javascript">
                 var suCnt = 0;
                 var suArr = [];
-                for (var i = 0; i < [[${maps}]].length; i++) {
-                    if ([[${maps}]][i].where == 0) {
+                for (var i = 0; i < [[${suwons}]].length; i++) {
 
-                        var element = document.createElement("a");
-                        element.href = "#";
-                        element.id = "smT" + suCnt++;
-                        suArr.push(element.id);
-                        element.text = [[${maps}]][i].name;
+                    var element = document.createElement("a");
+                    element.href = "#";
+                    element.id = "smT" + suCnt++;
+                    suArr.push(element.id);
+                    element.text = [[${suwons}]][i].name;
 
-                        var img = document.createElement("img");
-                        img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
-                        img.setAttribute("width", "20");
-                        img.setAttribute("height", "20");
-                        element.prepend(img);
+                    var img = document.createElement("img");
+                    img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+                    img.setAttribute("width", "20");
+                    img.setAttribute("height", "20");
+                    element.prepend(img);
 
-                        var suSidenav = document.getElementById("suSidenav");
-                        suSidenav.appendChild(element);
+                    var suSidenav = document.getElementById("suSidenav");
+                    suSidenav.appendChild(element);
 
-                        document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${maps}]][i].des + '</p>')
-                        document.write('<p class="smP" href="#" style="font-size: 14px">' +
-                            '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
-                            '' + [[${maps}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${maps}]][i].sum + '</p><br>')
-                        if (i == [[${maps}]].length - 1) {
-                            document.write('<p><br><br><br></p>')
-                        }
+                    document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${suwons}]][i].des + '</p>')
+                    document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                        '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                        '' + [[${suwons}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${suwons}]][i].sum + '</p><br>')
+                    if (i == [[${suwons}]].length - 1) {
+                        document.write('<p><br><br><br></p>')
                     }
+
                 }
             </script>
         </div>
 
-<!--        서울 리스트-->
+        <!--        서울 리스트-->
         <div id="seSidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSe()">&times;</a>
             <script th:inline="javascript">
                 var seCnt = 0;
                 var seArr = [];
-                for (var i = 0; i < [[${maps}]].length; i++) {
-                    if ([[${maps}]][i].where == 1) {
+                for (var i = 0; i < [[${seouls}]].length; i++) {
 
-                        var element = document.createElement("a");
-                        element.href = "#";
-                        element.id = "seT" + seCnt++;
-                        seArr.push(element.id);
-                        element.text = [[${maps}]][i].name;
+                    var element = document.createElement("a");
+                    element.href = "#";
+                    element.id = "seT" + seCnt++;
+                    seArr.push(element.id);
+                    element.text = [[${seouls}]][i].name;
 
-                        var img = document.createElement("img");
-                        img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
-                        img.setAttribute("width", "20");
-                        img.setAttribute("height", "20");
-                        element.prepend(img);
+                    var img = document.createElement("img");
+                    img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+                    img.setAttribute("width", "20");
+                    img.setAttribute("height", "20");
+                    element.prepend(img);
 
-                        var seSidenav = document.getElementById("seSidenav");
-                        seSidenav.appendChild(element);
+                    var seSidenav = document.getElementById("seSidenav");
+                    seSidenav.appendChild(element);
 
-                        document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${maps}]][i].des + '</p>')
-                        document.write('<p class="smP" href="#" style="font-size: 14px">' +
-                            '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
-                            '' + [[${maps}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${maps}]][i].sum + '</p><br>')
-                        if (i == [[${maps}]].length - 1) {
-                            document.write('<p><br><br><br></p>')
-                        }
+                    document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${seouls}]][i].des + '</p>')
+                    document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                        '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                        '' + [[${seouls}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${seouls}]][i].sum + '</p><br>')
+                    if (i == [[${seouls}]].length - 1) {
+                        document.write('<p><br><br><br></p>')
                     }
                 }
             </script>
@@ -231,6 +228,7 @@
 
     var markers = [],
         infoWindows = [];
+    seouls = [];
 
     for (let i = 0; i < [[${maps}]].length; i++) {
         var name = [[${maps}]][i].name;
@@ -238,6 +236,7 @@
         var star = [[${maps}]][i].star;
         var x = [[${maps}]][i].x;
         var y = [[${maps}]][i].y
+        var where = [[${maps}]][i].where;
 
         var contentString = [
             '<div class="info">' +
@@ -272,6 +271,11 @@
         });
         markers.push(marker);
         infoWindows.push(infowindow)
+        if (where == 1) {
+            seouls.push(marker);
+        }
+        console.log(markers);
+        console.log(seouls);
     }
     ;
 
@@ -332,6 +336,10 @@
         return markers;
     }
 
+    function getSeouls() {
+        return seouls;
+    }
+
     for (var i = 0, ii = markers.length; i < ii; i++) {
         naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
     }
@@ -343,6 +351,7 @@
     function openSu() {
         document.getElementById("suSidenav").style.width = "300px";
     }
+
     function openSe() {
         document.getElementById("seSidenav").style.width = "300px";
     }
@@ -359,16 +368,32 @@
         document.getElementById("seSidenav").style.width = "0";
     }
 
-    for (var i = 0, ii = [[${maps}]].length; i < ii; i++){
+    for (var i = 0, ii = [[${maps}]].length; i < ii; i++) {
         document.getElementById(suArr[i]).addEventListener('click', ListHandler(i));
+        document.getElementById(seArr[i]).addEventListener('click', sListHandler(i));
     }
-    for (var i = 0, ii = [[${maps}]].length; i < ii; i++){
-        document.getElementById(seArr[i]).addEventListener('click', ListHandler(i));
-    }
+    // for (var i = 0, ii = [[${maps}]].length; i < ii; i++) {
+    // }
 
     function ListHandler(seq) {
         return function (e) {
             var gMarkers = getMarkers();
+            var gInfoWindow = getInfoWindows();
+            var marker = gMarkers[seq];
+            var infowindow = gInfoWindow[seq];
+
+            if (infowindow.getMap()) {
+            } else {
+                infowindow.open(map, marker)
+            }
+            var pos = marker.getPosition();
+            map.panTo(pos);
+        };
+    }
+
+    function sListHandler(seq) {
+        return function (e) {
+            var gMarkers = getSeouls();
             var gInfoWindow = getInfoWindows();
             var marker = gMarkers[seq];
             var infowindow = gInfoWindow[seq];

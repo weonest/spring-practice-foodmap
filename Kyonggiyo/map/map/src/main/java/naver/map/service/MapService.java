@@ -20,4 +20,13 @@ public class MapService {
     public List<Map> findMaps() {
         return mapRepository.findAll();
     }
+
+    public List<Map> findSuwon() {
+        return mapRepository.getCampus(0);
+    }
+    public List<Map> findSeoul() {
+        return mapRepository.getCampus(1);
+    }
+
+
 }

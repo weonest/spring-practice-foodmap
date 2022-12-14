@@ -23,7 +23,7 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public Optional<Map> findByName(String name) {
-        List<Map> result = em.createQuery("select m from Map m whereere m.name = :name", Map.class)
+        List<Map> result = em.createQuery("select m from Map m where m.name = :name", Map.class)
                 .setParameter("name", name)
                 .getResultList();
 
@@ -32,7 +32,7 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public Optional<Map> findByX(double x) {
-        List<Map> result = em.createQuery("select m from Map m whereere m.x = :x", Map.class)
+        List<Map> result = em.createQuery("select m from Map m where m.x = :x", Map.class)
                 .setParameter("x", x)
                 .getResultList();
 
@@ -41,7 +41,7 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public Optional<Map> findByY(double y) {
-        List<Map> result = em.createQuery("select m from Map m whereere m.y = :y", Map.class)
+        List<Map> result = em.createQuery("select m from Map m where m.y = :y", Map.class)
                 .setParameter("y", y)
                 .getResultList();
 
@@ -50,11 +50,19 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public Optional<Map> findBywhere(long where) {
-        List<Map> result = em.createQuery("select m from Map m whereere m.where = :where", Map.class)
+        List<Map> result = em.createQuery("select m from Map m where m.where = :where", Map.class)
                 .setParameter("where", where)
                 .getResultList();
 
         return result.stream().findAny();
+    }
+
+    @Override
+    public List<Map> getCampus(long where) {
+        return em.createQuery("select m from Map m where m.where = :where")
+                .setParameter("where", where)
+                .getResultList();
+
     }
 
     @Override

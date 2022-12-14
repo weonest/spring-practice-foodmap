@@ -25,7 +25,12 @@ public class MapController {
     @RequestMapping("/map")
     public String list(Model model) {
         List<Map> maps = mapService.findMaps();
+        List<Map> suwons = mapService.findSuwon();
+        List<Map> seouls = mapService.findSeoul();
+
         model.addAttribute("maps", maps);
+        model.addAttribute("suwons", suwons);
+        model.addAttribute("seouls", seouls);
         System.out.println(maps.toString());
         return "mainMap";
     }
