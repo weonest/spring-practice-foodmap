@@ -368,12 +368,15 @@
         document.getElementById("seSidenav").style.width = "0";
     }
 
-    for (var i = 0, ii = [[${maps}]].length; i < ii; i++) {
+    for (var i = 0, ii = suArr.length; i < ii; i++) {
         document.getElementById(suArr[i]).addEventListener('click', ListHandler(i));
-        document.getElementById(seArr[i]).addEventListener('click', sListHandler(i));
+        console.log("i = " + i);
     }
-    // for (var i = 0, ii = [[${maps}]].length; i < ii; i++) {
-    // }
+    for (var i = 0, ii = seArr.length; i < ii; i++) {
+        document.getElementById(seArr[i]).addEventListener('click', sListHandler(i));
+        console.log("i2 = " + i);
+
+    }
 
     function ListHandler(seq) {
         return function (e) {
