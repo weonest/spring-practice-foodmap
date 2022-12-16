@@ -35,15 +35,4 @@ public class MapController {
         return "mainMap";
     }
 
-
-
-//    @RequestMapping("/map")
-//    public ModelAndView content() {
-//        List<Map> maps = mapService.findMaps();
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("mainMap");
-//        mv.addObject("maps", maps);
-//        return mv;
-//    }
-
 }
