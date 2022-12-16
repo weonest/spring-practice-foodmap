@@ -49,18 +49,18 @@ public class JpaMapRepository implements MapRepository {
     }
 
     @Override
-    public Optional<Map> findBywhere(long where) {
-        List<Map> result = em.createQuery("select m from Map m where m.where = :where", Map.class)
-                .setParameter("where", where)
+    public Optional<Map> findByCamp(long camp) {
+        List<Map> result = em.createQuery("select m from Map m where m.camp = :camp", Map.class)
+                .setParameter("camp", camp)
                 .getResultList();
 
         return result.stream().findAny();
     }
 
     @Override
-    public List<Map> getCampus(long where) {
-        return em.createQuery("select m from Map m where m.where = :where")
-                .setParameter("where", where)
+    public List<Map> getCampus(long camp) {
+        return em.createQuery("select m from Map m where m.camp = :camp")
+                .setParameter("camp", camp)
                 .getResultList();
 
     }

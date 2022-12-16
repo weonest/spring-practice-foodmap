@@ -236,7 +236,7 @@
         var star = [[${maps}]][i].star;
         var x = [[${maps}]][i].x;
         var y = [[${maps}]][i].y
-        var where = [[${maps}]][i].where;
+        var camp = [[${maps}]][i].camp;
 
         var contentString = [
             '<div class="info">' +
@@ -271,7 +271,7 @@
         });
         markers.push(marker);
         infoWindows.push(infowindow)
-        if (where == 1) {
+        if (camp == 1) {
             seouls.push(marker);
         }
         console.log(markers);

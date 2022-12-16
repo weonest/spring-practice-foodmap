@@ -22,7 +22,7 @@ public class Map {
                 ", des='" + des + '\'' +
                 ", star=" + star +
                 ", sum='" + sum + '\'' +
-                ", where=" + where +
+                ", camp=" + camp +
                 '}';
     }
 
@@ -32,7 +32,7 @@ public class Map {
     private String des;
     private double star;
     private String sum;
-    private Long where;
+    private long camp;
 
     public String getName() {
         return name;
@@ -82,11 +82,11 @@ public class Map {
         this.sum = sum;
     }
 
-    public Long getwhere() {
-        return where;
+    public Long getCamp() {
+        return camp;
     }
 
-    public void setwhere(Long where) {
-        this.where = where;
+    public void setCamp(Long camp) {
+        this.camp = camp;
     }
 }

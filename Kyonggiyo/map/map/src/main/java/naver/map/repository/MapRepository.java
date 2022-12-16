@@ -11,9 +11,9 @@ public interface MapRepository {
     Optional<Map> findByName(String name);
     Optional<Map> findByX(double x);
     Optional<Map> findByY(double y);
-    Optional<Map> findBywhere(long where);
+    Optional<Map> findByCamp(long camp);
 
-    List<Map> getCampus(long where);
+    List<Map> getCampus(long camp);
     List<Map> findAll();
 
 }
