@@ -229,6 +229,7 @@
     var markers = [],
         infoWindows = [];
     seouls = [];
+    seoulInfo = [];
 
     for (let i = 0; i < [[${maps}]].length; i++) {
         var name = [[${maps}]][i].name;
@@ -273,6 +274,7 @@
         infoWindows.push(infowindow)
         if (camp == 1) {
             seouls.push(marker);
+            seoulInfo.push(infowindow);
         }
 
     }
@@ -339,6 +341,10 @@
         return seouls;
     }
 
+    function getSeoulInfo() {
+        return seoulInfo;
+    }
+
     for (var i = 0, ii = markers.length; i < ii; i++) {
         naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
     }
@@ -394,7 +400,7 @@
     function sListHandler(seq) {
         return function (e) {
             var gMarkers = getSeouls();
-            var gInfoWindow = getInfoWindows();
+            var gInfoWindow = getSeoulInfo();
             var marker = gMarkers[seq];
             var infowindow = gInfoWindow[seq];
 
