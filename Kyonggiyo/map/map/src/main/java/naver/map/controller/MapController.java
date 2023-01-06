@@ -33,6 +33,7 @@ public class MapController {
         model.addAttribute("seouls", seouls);
         System.out.println(maps.toString());
         return "mainMap";
+
     }
 
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <th:block th:replace="fragment/config :: configFrag"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript"
+          src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=dol835p4ve"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+  <title>경기요 - 경기대 맛집 모음</title>
+  <style>* {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .info {
+    display: flex;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    line-height: 7px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #029ade;
+    border-radius: 23px;
+    padding: 0px 10px 0px 10px;
+  }
+
+  .right {
+    text-align: center;
+    font-size: 16px;
+    float: right;
+  }
+
+  .des {
+    font-size: 14px;
+  }
+
+  #side {
+    position: relative;
+    z-index: 1;
+  }
+
+  </style>
+</head>
+<body>
+
+<div id="map" style="width:100%;height:900px;">
+
+  <div id="side">
+    <th:block th:replace="common/sideStyles :: sideStylesFrag"/>
+    <body>
+
+    <!--        네비게이션 -->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a onclick="openSu()" href="#">수원캠퍼스</a>
+      <a onclick="openSe()" href="#">서울캠퍼스</a>
+      <a href="#">준비중</a>
+      <a href="#">준비중</a>
+    </div>
+
+    <!--        수원 리스트-->
+    <th:block th:replace="fragment/suwon::suwonFrag"/>
+
+    <!--        서울 리스트-->
+    <th:block th:replace="fragment/seoul::seoulFrag"/>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+            <img src="https://cdn-icons-png.flaticon.com/512/9073/9073147.png" height="50" width="50" Menu></span>
+
+    </body>
+  </div>
+
+</div>
+
+<th:block th:replace="common/script::scriptFrag"/>
+</body>
+</html>

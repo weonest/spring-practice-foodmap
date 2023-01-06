@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="suwonFrag">
+<div id="suSidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSu()">&times;</a>
+    <script th:inline="javascript">
+        var cnt = 0;
+        var ListArr = [];
+        for (var i = 0; i < [[${suwons}]].length; i++) {
+
+            var element = document.createElement("a");
+            element.style.fontSize = "20px";
+            element.href = "#";
+            element.id = "list" + cnt++;
+            ListArr.push(element.id);
+            element.text = [[${suwons}]][i].name;
+
+            var img = document.createElement("img");
+            img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+            img.setAttribute("width", "16");
+            img.setAttribute("height", "16");
+            element.prepend(img);
+
+            var suSidenav = document.getElementById("suSidenav");
+            suSidenav.appendChild(element);
+
+            document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${suwons}]][i].des + '</p>')
+            document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                '' + [[${suwons}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${suwons}]][i].sum + '</p><br>')
+
+        }
+    </script>
+</div>
+</th:block>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="scriptFrag">
+    <script th:inline="javascript">
+
+        var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(37.3006759, 127.035805),
+            zoom: 16
+        });
+
+        var markers = [],
+            infoWindows = [];
+
+
+        for (let i = 0; i < [[${maps}]].length; i++) {
+            var name = [[${maps}]][i].name;
+            var des = [[${maps}]][i].des;
+            var star = [[${maps}]][i].star;
+            var x = [[${maps}]][i].x;
+            var y = [[${maps}]][i].y
+
+
+            var contentString = [
+                '<div class="info">' +
+                '<div class="right">' +
+                '<h2>' +
+                '<img src="https://cdn-icons-png.flaticon.com/512/3183/3183463.png" width="20" height="20">' +
+                name,
+                '</h2>' +
+                '<p class="des">' +
+                des,
+                '</p' +
+                '><p>' +
+                '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="12" height="12">' +
+                star,
+                '</p></div>' +
+                '</div>',
+            ].join('');
+
+            var marker = new naver.maps.Marker({
+                map: map,
+                position: new naver.maps.LatLng(x, y)
+            })
+            var infowindow = new naver.maps.InfoWindow({
+                content:
+                contentString,
+                backgroundColor: "",
+                borderWidth: "",
+                disableAnchor: true,
+                anchorSkew: false,
+                anchorColor: "",
+            });
+            markers.push(marker);
+            infoWindows.push(infowindow)
+        }
+        ;
+
+        naver.maps.Event.addListener(map, 'idle', function () {
+            updateMarkers(map, markers);
+        });
+
+        function updateMarkers(map, markers) {
+            var mapBoounds = map.getBounds();
+            var marker, position;
+
+            for (var i = 0; i < markers.length; i++) {
+
+                marker = markers[i]
+                position = marker.getPosition();
+
+                if (mapBoounds.hasLatLng(position)) {
+                    showMarker(map, marker);
+                } else {
+                    hideMarker(map, marker);
+                }
+            }
+        }
+
+        function showMarker(map, marker) {
+
+            if (marker.setMap()) return;
+            marker.setMap(map);
+        }
+
+        function hideMarker(map, marker) {
+
+            if (!marker.setMap()) return;
+            mark.setMap(null);
+        }
+
+        function getClickHandler(seq) {
+            return function (e) {
+                var marker = markers[seq],
+                    infoWindow = infoWindows[seq];
+
+                if (infoWindow.getMap()) {
+                    infoWindow.close();
+                } else {
+                    infoWindow.open(map, marker);
+                }
+                var pos = marker.getPosition();
+                map.panTo(pos);
+            }
+        }
+
+        function getInfoWindows() {
+            return infoWindows;
+        }
+
+        function getMarkers() {
+            return markers;
+        }
+
+        for (var i = 0, ii = markers.length; i < ii; i++) {
+            naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "35%";
+            document.getElementById("mySidenav").style.height = "25%";
+        }
+
+        function openSu() {
+            document.getElementById("suSidenav").style.width = "75%";
+            document.getElementById("suSidenav").style.height = "25%";
+        }
+
+        function openSe() {
+            document.getElementById("seSidenav").style.width = "75%";
+            document.getElementById("seSidenav").style.height = "25%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function closeSu() {
+            document.getElementById("suSidenav").style.width = "0";
+        }
+
+        function closeSe() {
+            document.getElementById("seSidenav").style.width = "0";
+        }
+
+        for (var i = 0, ii = ListArr.length; i < ii; i++) {
+            document.getElementById(ListArr[i]).addEventListener('click', ListHandler(i));
+        }
+
+        function ListHandler(seq) {
+            return function (e) {
+                var gMarkers = getMarkers();
+                var gInfoWindow = getInfoWindows();
+                var marker = gMarkers[seq];
+                var infowindow = gInfoWindow[seq];
+
+                if (infowindow.getMap()) {
+                } else {
+                    infowindow.open(map, marker)
+                }
+                var pos = marker.getPosition();
+                map.panTo(pos);
+            };
+        }
+
+    </script>
+</th:block>
+</body>
+</html>

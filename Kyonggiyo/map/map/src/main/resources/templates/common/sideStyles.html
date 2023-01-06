@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="sideStylesFrag">
+<head>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            border-radius: 30px;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #029ade;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 22px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #4df804;
+        }
+
+        .smP {
+            margin: 0px;
+            padding: 0px 8px 0px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            padding-top: 3px;
+            top: 0;
+            right: 5px;
+            font-size: 36px;
+            margin-left: 80px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 16px;
+
+            }
+        }
+        .blank {
+            position: sticky;
+            top:0;
+        }
+    </style>
+</head>
+    </th:block>
+</html>
