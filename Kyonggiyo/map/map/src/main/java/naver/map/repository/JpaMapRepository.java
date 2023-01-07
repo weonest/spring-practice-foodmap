@@ -1,7 +1,7 @@
 package naver.map.repository;
 
 import naver.map.domain.Map;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -70,4 +70,12 @@ public class JpaMapRepository implements MapRepository {
         return em.createQuery("select m from Map m", Map.class)
                 .getResultList();
     }
+
+//    오름차순 정렬
+    @Override
+    public List<Map> getOrder() {
+        return em.createQuery("select m from Map m ORDER BY m.star DESC ", Map.class)
+                .getResultList();
+    }
 }
+

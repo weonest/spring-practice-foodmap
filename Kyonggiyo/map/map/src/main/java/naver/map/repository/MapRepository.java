@@ -1,6 +1,7 @@
 package naver.map.repository;
 
 import naver.map.domain.Map;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,5 +16,7 @@ public interface MapRepository {
 
     List<Map> getCampus(long camp);
     List<Map> findAll();
+    List<Map> getOrder();
+
 
 }

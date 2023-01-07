@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:fragment="starFrag">
+    <div id="stSidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSt()">&times;</a>
+        <script th:inline="javascript">
+
+            for (var i = 0; i < [[${stars}]].length; i++) {
+
+                var element = document.createElement("a");
+                element.style.fontSize = "20px";
+                element.href = "#";
+                element.id = "list" + cnt++;
+                ListArr.push(element.id);
+                element.text = [[${stars}]][i].name;
+
+                var img = document.createElement("img");
+                img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
+                img.setAttribute("width", "16");
+                img.setAttribute("height", "16");
+                element.prepend(img);
+
+                var stSidenav = document.getElementById("stSidenav");
+                stSidenav.appendChild(element);
+
+                document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${stars}]][i].des + '</p>')
+                document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                    '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                    '' + [[${stars}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${stars}]][i].sum + '</p><br>')
+
+            }
+        </script>
+    </div>
+</th:block>
+</html>
