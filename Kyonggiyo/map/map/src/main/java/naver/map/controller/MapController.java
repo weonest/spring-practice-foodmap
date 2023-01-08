@@ -2,7 +2,7 @@ package naver.map.controller;
 
 import naver.map.domain.Map;
 import naver.map.service.MapService;
-import naver.map.service.MapService2;
+import naver.map.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +15,11 @@ public class MapController {
 
 
     private final MapService mapService;
-    private final MapService2 mapService2;
+    private final BoardService mapService2;
 
 
     @Autowired
-    public MapController(MapService mapService, MapService2 mapService2) {
+    public MapController(MapService mapService, BoardService mapService2) {
         this.mapService = mapService;
         this.mapService2 = mapService2;
     }
@@ -27,7 +27,7 @@ public class MapController {
     @RequestMapping("/map")
     public String list(Model model) {
         List<Map> maps = mapService.findMaps();
-        List<Map> suwons = mapService2.findSuwon();
+        List<Map> suwons = mapService.findSuwon();
         List<Map> seouls = mapService.findSeoul();
         List<Map> stars = mapService.starOrder();
 

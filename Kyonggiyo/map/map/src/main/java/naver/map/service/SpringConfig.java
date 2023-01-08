@@ -1,9 +1,8 @@
 package naver.map.service;
 
 import naver.map.repository.JpaMapRepository;
-import naver.map.repository.JpaMapRepository2;
 import naver.map.repository.MapRepository;
-import naver.map.repository.MapRepository2;
+import naver.map.repository.BoardRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,17 +25,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public MapService2 mapService2(){
-        return new MapService2(mapRepository2());
-    }
-
-    @Bean
     public MapRepository mapRepository() {
         return new JpaMapRepository(em);
     }
 
-    @Bean
-    public MapRepository2 mapRepository2() {
-        return new JpaMapRepository2(em);
-    }
 }
