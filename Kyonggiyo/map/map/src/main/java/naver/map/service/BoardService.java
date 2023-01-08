@@ -5,6 +5,8 @@ import naver.map.domain.Board;
 import naver.map.domain.BoardRequestDTO;
 import naver.map.domain.BoardResponseDTO;
 import naver.map.domain.Map;
+import naver.map.exception.CustomException;
+import naver.map.exception.ErrorCode;
 import naver.map.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -39,6 +41,16 @@ public class BoardService {
         Sort sort = Sort.by(Sort.Direction.DESC, "id", "createdDate");
         List<Board> list = boardRepository.findAll(sort);
         return list.stream().map(BoardResponseDTO::new).collect(Collectors.toList());
+
+        // return 문을 풀어서 작성하면
+
+        //List<BoardResponseDto> boardList = new ArrayList<>();
+        //
+        //    for (Board entity : list) {
+        //        boardList.add(new BoardResponseDto(entity));
+        //    }
+        //
+        //    return boardList;
     }
 
     /**
@@ -46,15 +58,24 @@ public class BoardService {
      */
     @Transactional
     public Long update(final Long id, final BoardRequestDTO params) {
-
+        //사용자 정의 예외 클래스 생성 이후 적용
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         entity.update(params.getTitle(), params.getContent(), params.getWriter());
         return id;
     }
 
-    private class CustomException extends RuntimeException {
-        public CustomException customException;
-        public String
-        }
-    }
+    //풀어서 쓰면 다음과 같다
+    //@Transactional
+    //public Long update(final Long id, final BoardRequestDto params) {
+    //
+    //    Board entity = boardRepository.findById(id).orElse(null);
+    //
+    //    if (entity == null) {
+    //        throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
+    //    }
+    //
+    //    entity.update(params.getTitle(), params.getContent(), params.getWriter());
+    //    return id;
+    //}
+
 }
