@@ -37,4 +37,5 @@ public class BoardApiController {
     public String test() {
         throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
     }
+
 }

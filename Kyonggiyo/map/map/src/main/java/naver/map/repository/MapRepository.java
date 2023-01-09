@@ -17,6 +17,7 @@ public interface MapRepository {
     List<Map> getCampus(long camp);
     List<Map> findAll();
     List<Map> getOrder();
+    List<Map> getOrderCamp(long camp);
 
 
 }

@@ -29,16 +29,25 @@ public class MapController {
         List<Map> maps = mapService.findMaps();
         List<Map> suwons = mapService.findSuwon();
         List<Map> seouls = mapService.findSeoul();
-        List<Map> stars = mapService.starOrder();
 
         model.addAttribute("maps", maps);
         model.addAttribute("suwons", suwons);
         model.addAttribute("seouls", seouls);
-        model.addAttribute("stars", stars);
 
         System.out.println(maps.toString());
         return "mainMap";
 
     }
 
+    @RequestMapping("/map/star")
+    public String getStar(Model model) {
+        List<Map> stars = mapService.starOrder();
+        List<Map> suwons = mapService.starOrderSuwon();
+        List<Map> seouls = mapService.starOrderSeoul();
+        model.addAttribute("maps", stars);
+        model.addAttribute("suwons", suwons);
+        model.addAttribute("seouls", seouls);
+
+        return "mainMap";
+    }
 }

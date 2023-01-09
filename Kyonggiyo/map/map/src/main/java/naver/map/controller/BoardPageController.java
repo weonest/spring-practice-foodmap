@@ -12,4 +12,9 @@ public class BoardPageController {
     public String openBoardList() {
         return "board/list";
     }
+
+    @GetMapping("write")
+    public String openBoardWrite() {
+        return "board/write";
+    }
 }

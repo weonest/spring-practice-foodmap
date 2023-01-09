@@ -47,4 +47,14 @@ public class Board {
         this.modifiedDate = LocalDateTime.now(); // 작성 시간
     }
 
+    //조회수 증가
+    public void increaseHits() {
+        this.hits++;
+    }
+
+    //게시글 삭제
+    public void delete() {
+        this.deleteYn = 'Y';
+    }
+
 }

@@ -31,5 +31,10 @@ public class MapService {
     public List<Map> starOrder() {
         return mapRepository.getOrder();
     }
-
+    public List<Map> starOrderSuwon() {
+        return mapRepository.getOrderCamp(0);
+    }
+    public List<Map> starOrderSeoul() {
+        return mapRepository.getOrderCamp(1);
+    }
 }

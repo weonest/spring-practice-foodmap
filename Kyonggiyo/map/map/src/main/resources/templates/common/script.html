@@ -11,6 +11,8 @@
         var markers = [],
             infoWindows = [];
 
+        var temp = [],
+            infoTemp = [];
 
         for (let i = 0; i < [[${maps}]].length; i++) {
             var name = [[${maps}]][i].name;
@@ -51,9 +53,17 @@
                 anchorSkew: false,
                 anchorColor: "",
             });
-            markers.push(marker);
-            infoWindows.push(infowindow)
+            if ([[${maps}]][i].camp == 1) {
+                temp.push(marker);
+                infoTemp.push(infowindow);
+
+            } else {
+                markers.push(marker);
+                infoWindows.push(infowindow)
+            }
         }
+        markers.push(...temp);
+        infoWindows.push(...infoTemp);
         ;
 
         naver.maps.Event.addListener(map, 'idle', function () {
@@ -131,10 +141,13 @@
             document.getElementById("seSidenav").style.height = "25%";
         }
 
-        function openStar() {
-            document.getElementById("stSidenav").style.width = "75%";
-            document.getElementById("stSidenav").style.height = "25%";
+        function starMsg() {
+            alert("별점순 사이트로 이동합니다.")
         }
+        // function openStar() {
+        //     document.getElementById("stSidenav").style.width = "75%";
+        //     document.getElementById("stSidenav").style.height = "25%";
+        // }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
@@ -148,9 +161,9 @@
             document.getElementById("seSidenav").style.width = "0";
         }
 
-        function closeSt() {
-            document.getElementById("stSidenav").style.width = "0";
-        }
+        // function closeSt() {
+        //     document.getElementById("stSidenav").style.width = "0";
+        // }
 
         for (var i = 0, ii = ListArr.length; i < ii; i++) {
             document.getElementById(ListArr[i]).addEventListener('click', ListHandler(i));
