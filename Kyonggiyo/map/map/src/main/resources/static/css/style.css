@@ -1233,10 +1233,16 @@ Version 1.0
 .page-title {
   display: inline-block;
   margin: 0px;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 75px;
   font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
 }
+.page-title:hover{
+  color: #4df804
+}
+
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
 26. Misc

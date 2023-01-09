@@ -34,6 +34,27 @@ public class BoardService {
     }
 
     /**
+     * 게시글 수정
+     */
+    @Transactional
+    public Long update(final Long id, final BoardRequestDTO params) {
+        //사용자 정의 예외 클래스 생성 이후 적용
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        entity.update(params.getTitle(), params.getContent(), params.getWriter());
+        return id;
+    }
+
+    /**
+     * 게시글 삭제
+     */
+    @Transactional
+    public Long delete(final Long id) {
+        Board entity = boardRepository.findById(id).orElseThrow(() ->new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        entity.delete();
+        return id;
+    }
+
+    /**
      * 게시글 리스트 조회
      */
     public List<BoardResponseDTO> findAll() {
@@ -53,17 +74,22 @@ public class BoardService {
         //    return boardList;
     }
 
-    /**
-     * 게시글 수정
-     */
-    @Transactional
-    public Long update(final Long id, final BoardRequestDTO params) {
-        //사용자 정의 예외 클래스 생성 이후 적용
-        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        entity.update(params.getTitle(), params.getContent(), params.getWriter());
-        return id;
+    public List<BoardResponseDTO> findAllByDelteYn(final char deleteYn) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id", "createdDate");
+        List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
+        return list.stream().map(BoardResponseDTO::new).collect(Collectors.toList());
     }
 
+    /**
+     * 게시글 상세정보 조회
+     */
+    @Transactional
+    public BoardResponseDTO findById(final Long id) {
+
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        entity.increaseHits();
+        return new BoardResponseDTO(entity);
+    }
     //풀어서 쓰면 다음과 같다
     //@Transactional
     //public Long update(final Long id, final BoardRequestDto params) {
@@ -77,5 +103,7 @@ public class BoardService {
     //    entity.update(params.getTitle(), params.getContent(), params.getWriter());
     //    return id;
     //}
+
+
 
 }
