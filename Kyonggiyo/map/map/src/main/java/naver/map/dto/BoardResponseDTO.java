@@ -1,10 +1,20 @@
-package naver.map.domain;
+package naver.map.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import naver.map.domain.Board;
 
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
+//@NoArgsConstructor 선언 이유
+//MyBatis에서 SELECT 결과를 객체에 매핑하기 위해서는 기본 생성자가 필요
+//
+//그러나, BoardResponseDTO는 Board Entity를 통한 객체 생성만을 허용하고 있습니다.
+//
+//BoardResponseDTO가 기본 생성자를 포함하도록 하기 위함
+
 public class BoardResponseDTO {
 
     private Long id; // PK

@@ -1,14 +1,15 @@
 package naver.map.controller;
 
 import lombok.RequiredArgsConstructor;
-import naver.map.domain.BoardRequestDTO;
-import naver.map.domain.BoardResponseDTO;
+import naver.map.dto.BoardRequestDTO;
+import naver.map.dto.BoardResponseDTO;
 import naver.map.exception.CustomException;
 import naver.map.exception.ErrorCode;
+import naver.map.paging.CommonParams;
 import naver.map.service.BoardService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -35,20 +36,27 @@ public class BoardApiController {
     public Long delete(@PathVariable final Long id) {
         return boardService.delete(id);
     }
-    // 게시글 리스트 조회
-    @GetMapping("/boards")
-    public List<BoardResponseDTO> findAll(@RequestParam final char deleteYn) {
-        return boardService.findAllByDelteYn(deleteYn);
-    }
+
+//    // 게시글 리스트 조회
+//    @GetMapping("/boards")
+//    public List<BoardResponseDTO> findAll(@RequestParam final char deleteYn) {
+//        return boardService.findAllByDelteYn(deleteYn);
+//    }
 
     // 게시글 상세정보 조회
     @GetMapping("/boards/{id}")
     public BoardResponseDTO findById(@PathVariable final long id) {
         return boardService.findById(id);
     }
+
     @GetMapping("/test")
     public String test() {
         throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
     }
 
+    // 게시글 리스트 조회 << 페이지네이션 6
+    @GetMapping("/boards")
+    public Map<String, Object> findAll(final CommonParams params) {
+        return boardService.findAll(params);
+    }
 }

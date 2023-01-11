@@ -2,19 +2,18 @@ package naver.map.service;
 
 import lombok.RequiredArgsConstructor;
 import naver.map.domain.Board;
-import naver.map.domain.BoardRequestDTO;
-import naver.map.domain.BoardResponseDTO;
-import naver.map.domain.Map;
+import naver.map.dto.BoardRequestDTO;
+import naver.map.dto.BoardResponseDTO;
 import naver.map.exception.CustomException;
 import naver.map.exception.ErrorCode;
+import naver.map.paging.CommonParams;
+import naver.map.paging.Pagination;
 import naver.map.repository.BoardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +21,7 @@ import java.util.stream.Collectors;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final BoardMapper boardMapper;
 
     /**
      * 게시글 생성
@@ -49,7 +49,7 @@ public class BoardService {
      */
     @Transactional
     public Long delete(final Long id) {
-        Board entity = boardRepository.findById(id).orElseThrow(() ->new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         entity.delete();
         return id;
     }
@@ -104,6 +104,31 @@ public class BoardService {
     //    return id;
     //}
 
+    /** 페이지네이션 5
+     * 게시글 리스트 조회 (With. paigination information)
+     */
+    public Map<String, Object> findAll(CommonParams params) {
 
+        //게시글 수 조회
+        int count = boardMapper.count(params);
 
-}
+        if (count < 1) {
+            return Collections.emptyMap();
+        }
+
+        //페이지네이션 정보 계산
+        Pagination pagination = new Pagination(count, params);
+        params.setPagination(pagination);
+
+        //게시글 리스트 조회
+        List<BoardResponseDTO> list = boardMapper.findAll(params);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("params", params);
+        response.put("list", list);
+
+        return response;
+        //params의 멤버인 pagination에 계산된 페이지네이션 정보를 저장했기 때문에
+        //프론트엔드 영역에서는 response.params.pagination과 같이 페이지네이션 정보에 접근할 수 있다
+    }
+    }

@@ -1,8 +1,9 @@
-package naver.map.domain;
+package naver.map.dto;
 
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import naver.map.domain.Board;
 
 @Getter
 @NoArgsConstructor
