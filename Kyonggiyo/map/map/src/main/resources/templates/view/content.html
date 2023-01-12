@@ -8,6 +8,7 @@
   <script type="text/javascript"
           src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=dol835p4ve"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
   <title>경기요 - 경기대 맛집 모음</title>
   <style>* {
     font-family: 'Noto Sans KR', sans-serif;
@@ -54,6 +55,11 @@
     <!--        네비게이션 -->
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav(mySide);">&times;</a>
+      <form action="/map/search" id = "searchForm" onsubmit="return false;" method="post">
+        <fieldset><input type="text" id="keyword" name = "keyword" class="form-control" placeholder="키워드를 입력해 주세요">
+          <button type="button" onclick="getList();" class="btn-primary"><i class="fa fa-search"></i></button></fieldset>
+      </form>
+
       <a onclick="openNav(suSide)" href="#">수원캠퍼스</a>
       <a onclick="openNav(seSide)" href="#">서울캠퍼스</a>
       <a onclick="starMsg()" href="/map/star">별점순</a>
@@ -68,6 +74,8 @@
 
     <!--           별점순-->
 <!--    <th:block th:replace="fragment/starOrder::starFrag"/>-->
+
+    <th:block th:replace="fragment/searchList::serachFrag"/>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav(mySide)">
             <img src="https://cdn-icons-png.flaticon.com/512/9073/9073147.png" height="50" width="50" Menu></span>
