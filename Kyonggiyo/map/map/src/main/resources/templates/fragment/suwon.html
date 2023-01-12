@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="suwonFrag">
-<div id="suSidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSu()">&times;</a>
+<div id="suSidenav" class="sidenav" ondblclick="goTop()">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav(suSide)">&times;</a>
     <script th:inline="javascript">
         var cnt = 0;
         var ListArr = [];

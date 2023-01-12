@@ -31,18 +31,18 @@ public class JpaMapRepository implements MapRepository {
     }
 
     @Override
-    public Optional<Map> findByX(double x) {
-        List<Map> result = em.createQuery("select m from Map m where m.x = :x", Map.class)
-                .setParameter("x", x)
+    public Optional<Map> findByDes(String des) {
+        List<Map> result = em.createQuery("select m from Map m where m.des = :des", Map.class)
+                .setParameter("des", des)
                 .getResultList();
 
         return result.stream().findAny();
     }
 
     @Override
-    public Optional<Map> findByY(double y) {
-        List<Map> result = em.createQuery("select m from Map m where m.y = :y", Map.class)
-                .setParameter("y", y)
+    public Optional<Map> findBySum(String sum) {
+        List<Map> result = em.createQuery("select m from Map m where m.sum = :sum", Map.class)
+                .setParameter("sum", sum)
                 .getResultList();
 
         return result.stream().findAny();
@@ -80,10 +80,20 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public List<Map> getOrderCamp(long camp) {
-        return em.createQuery("select m from Map m where m.camp =:camp ORDER BY m.star DESC ", Map.class)
+        return em.createQuery("select m from Map m where m.camp =:camp ORDER BY m.star DESC, m.id ASC ", Map.class)
                 .setParameter("camp", camp)
                 .getResultList();
     }
+
+    // name, des, sum
+
+    @Override
+    public List<Map> getSearch(String keyword) {
+        return em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword ", Map.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
+    }
+
 
 }
 

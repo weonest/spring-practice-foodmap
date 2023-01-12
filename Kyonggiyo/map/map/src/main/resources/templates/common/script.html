@@ -126,44 +126,34 @@
             naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
         }
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "35%";
-            document.getElementById("mySidenav").style.height = "25%";
+        var mySide = "mySidenav",
+            suSide = "suSidenav",
+            seSide = "seSidenav";
+            all = "all";
+
+        function openNav(id) {
+            if (id === suSide || id === seSide) {
+            document.getElementById(id).style.width = "75%";
+            document.getElementById(id).style.height = "25%";
+            } else {
+                document.getElementById(id).style.width = "35%";
+                document.getElementById(id).style.height = "25%";
+            }
         }
 
-        function openSu() {
-            document.getElementById("suSidenav").style.width = "75%";
-            document.getElementById("suSidenav").style.height = "25%";
-        }
-
-        function openSe() {
-            document.getElementById("seSidenav").style.width = "75%";
-            document.getElementById("seSidenav").style.height = "25%";
+        function closeNav(id) {
+            document.getElementById("suSidenav").style.width = "0";
+            document.getElementById("seSidenav").style.width = "0";
+            document.getElementById(id).style.width = "0";
         }
 
         function starMsg() {
             alert("별점순 사이트로 이동합니다.")
         }
-        // function openStar() {
-        //     document.getElementById("stSidenav").style.width = "75%";
-        //     document.getElementById("stSidenav").style.height = "25%";
-        // }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
+        function goTop() {
+            window.scrollTo(0, 0);
         }
-
-        function closeSu() {
-            document.getElementById("suSidenav").style.width = "0";
-        }
-
-        function closeSe() {
-            document.getElementById("seSidenav").style.width = "0";
-        }
-
-        // function closeSt() {
-        //     document.getElementById("stSidenav").style.width = "0";
-        // }
 
         for (var i = 0, ii = ListArr.length; i < ii; i++) {
             document.getElementById(ListArr[i]).addEventListener('click', ListHandler(i));
@@ -188,4 +178,4 @@
     </script>
 </th:block>
 </body>
-</html>
+</html>/map-0.0.1-SNAPSHOT.jar

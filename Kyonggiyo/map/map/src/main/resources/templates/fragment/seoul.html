@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="seoulFrag">
     <div id="seSidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeSe()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav(seSide)">&times;</a>
         <script th:inline="javascript">
 
             for (var i = 0; i < [[${seouls}]].length; i++) {

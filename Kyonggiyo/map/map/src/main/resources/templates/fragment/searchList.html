@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<form action "searchForm" onsubmit="return false;">
+    <input type="text" id="keyword" class="form-control" placeholder="키워드를 입력해 주세요"
+</form>
+<button type="button" onclick="getList();" class="btn-primary"></button>
+
+<script th:inline="javascript">
+    window.onload = () => {
+        getList();
+    }
+
+    /**
+     * 게시글 조회
+     */
+    function getList() {
+
+        const keyword = /*[[ ${keyword} ]]*/;
+
+        if (!keyword) {
+            return false;
+        }
+
+        fetch(`/map/${keyword}`).then(response => {
+            if (!response.ok) {
+                throw new Error('Request failed...');
+            }
+            return response.json();
+
+        }).then(json => {
+            console.table(json);
+
+            Object.keys(json).forEach(key => {
+                const elem = document.getElementById(key);
+                if (elem) {
+                    elem.innerText = json[key];
+                }
+                /**
+                 * 반복문 안 쓰면
+                 * const form = document.getElementById('form');
+                 *            form.title.value = json.title;
+                 *            form.content.value = json.content;
+                 *            form.writer.value = json.writer;
+                 */
+            });
+
+        }).catch(error => {
+            alert('게시글 정보를 찾을 수 없습니다.');
+            goList();
+        });
+    }
+</script>
+</body>
+</html>

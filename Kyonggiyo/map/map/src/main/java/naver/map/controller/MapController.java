@@ -2,11 +2,13 @@ package naver.map.controller;
 
 import naver.map.domain.Map;
 import naver.map.service.MapService;
-import naver.map.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,13 +17,11 @@ public class MapController {
 
 
     private final MapService mapService;
-    private final BoardService mapService2;
 
 
     @Autowired
-    public MapController(MapService mapService, BoardService mapService2) {
+    public MapController(MapService mapService) {
         this.mapService = mapService;
-        this.mapService2 = mapService2;
     }
 
     @RequestMapping("/map")
@@ -41,13 +41,24 @@ public class MapController {
 
     @RequestMapping("/map/star")
     public String getStar(Model model) {
+
         List<Map> stars = mapService.starOrder();
         List<Map> suwons = mapService.starOrderSuwon();
         List<Map> seouls = mapService.starOrderSeoul();
+
         model.addAttribute("maps", stars);
         model.addAttribute("suwons", suwons);
         model.addAttribute("seouls", seouls);
 
         return "mainMap";
+    }
+
+    @PostMapping("/map")
+    public String getKeyword(@RequestParam String keyword, Model model) {
+        List<Map> lists = mapService.getSearchList(keyword);
+
+        model.addAttribute("keywords", lists);
+
+        return "mainMap;";
     }
 }
