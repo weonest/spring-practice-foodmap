@@ -4,6 +4,7 @@
 <th:block th:fragment="searchFrag">
 <script th:inline="javascript">
     window.onload = () => {
+        setQueryStringParams()
         getList();
     }
 

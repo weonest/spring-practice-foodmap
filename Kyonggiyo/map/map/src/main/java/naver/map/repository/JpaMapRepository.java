@@ -92,6 +92,7 @@ public class JpaMapRepository implements MapRepository {
         return em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword ", Map.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
+
     }
 
 

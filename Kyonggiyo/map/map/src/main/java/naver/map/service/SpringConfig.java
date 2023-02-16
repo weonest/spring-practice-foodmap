@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource("classpath:/application.properties")
 @RequiredArgsConstructor
 public class SpringConfig {
     private final DataSource dataSource;

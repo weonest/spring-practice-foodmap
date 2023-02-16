@@ -37,6 +37,7 @@ public class MapService {
     public List<Map> starOrderSeoul() {
         return mapRepository.getOrderCamp(1);
     }
+
     public List<Map> getSearchList(String keyword){
         return mapRepository.getSearch(keyword);
     }

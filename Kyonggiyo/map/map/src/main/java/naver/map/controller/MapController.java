@@ -54,7 +54,7 @@ public class MapController {
     public String getKeyword(String keyword, Model model) {
         List<Map> lists = mapService.getSearchList(keyword);
 
-        model.addAttribute("keyword", lists);
+        model.addAttribute("list", lists);
 
         return "mainMap;";
     }

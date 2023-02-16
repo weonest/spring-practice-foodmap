@@ -13,7 +13,10 @@ public class GlobalExceptionHandler {
     /*
      * Developer Custom Exception
      */
-    @ExceptionHandler(CustomException.class)
+
+    //ResponseEntity<T> 는 HTTP Request에 대한 응답 데이터를 포함한 클래스
+    // <T>에 해당하는 데이터와 HTTP 상태 코드를 함께 리턴할 수 있다
+   @ExceptionHandler(CustomException.class)
     protected ResponseEntity<ErrorResponse> handleCustomException(final CustomException e) {
         log.error("handleCustomException: {}", e.getErrorCode());
         return ResponseEntity

@@ -13,7 +13,7 @@ public class BoardRequestDTO {
     private String writer; // 작성자
     private char deleteYn; // 삭제 여부
 
-    public Board toEntity() {
+    public Board toEntity() { // 요청받은 값들을 기준으로 Entity화 시키기 위해
         return Board.builder()
                 .title(title)
                 .content(content)

@@ -55,8 +55,8 @@
     <!--        네비게이션 -->
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav(mySide);">&times;</a>
-      <form action="/map/search" id = "searchForm" onsubmit="return false;" method="post">
-        <fieldset><input type="text" id="keyword" name = "keyword" class="form-control" placeholder="키워드를 입력해 주세요">
+      <form id="listForm" onsubmit="return false;" method="post">
+        <fieldset><input type="text" id="listWord" name = "listWord" class="form-control" placeholder="키워드를 입력해 주세요">
           <button type="button" onclick="getList();" class="btn-primary"><i class="fa fa-search"></i></button></fieldset>
       </form>
 
@@ -75,7 +75,7 @@
     <!--           별점순-->
 <!--    <th:block th:replace="fragment/starOrder::starFrag"/>-->
 
-    <th:block th:replace="fragment/searchList::serachFrag"/>
+<!--    <th:block th:replace="fragment/searchList::searchFrag"/>-->
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav(mySide)">
             <img src="https://cdn-icons-png.flaticon.com/512/9073/9073147.png" height="50" width="50" Menu></span>

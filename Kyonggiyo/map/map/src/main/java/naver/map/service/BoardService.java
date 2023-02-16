@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor //final 로 선언된 모든 멤버에 대한 생성자를 만들어 줌
 public class BoardService {
 
     private final BoardRepository boardRepository;
@@ -57,7 +57,7 @@ public class BoardService {
     /**
      * 게시글 리스트 조회
      */
-    public List<BoardResponseDTO> findAll() {
+    public List<BoardResponseDTO> findAll() { // sort를 파라미터로 받는 내부 메소드
 
         Sort sort = Sort.by(Sort.Direction.DESC, "id", "createdDate");
         List<Board> list = boardRepository.findAll(sort);

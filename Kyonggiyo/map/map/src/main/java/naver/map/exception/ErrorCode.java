@@ -6,16 +6,20 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum ErrorCode {
+public enum ErrorCode { // 클래스처럼 보이게 하는 상수. 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의한 것
 
     /*
      * 400 BAD_REQUEST: 잘못된 요청
      */
+
+
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
+    // 404 = STATUS
+    // CODE                    ERROR                MESSAGE
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글 정보를 찾을 수 없습니다."),
 
     /*

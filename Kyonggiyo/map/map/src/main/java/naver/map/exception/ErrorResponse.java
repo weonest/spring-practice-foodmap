@@ -15,9 +15,16 @@ public class ErrorResponse {
 
     public ErrorResponse(ErrorCode errorCode) {
         this.status = errorCode.getStatus().value();
+        // 404
+
         this.error = errorCode.getStatus().name();
+        // "NOT_FOUND"
+
         this.code = errorCode.name();
+        // POSTS_NOT_FOUND
+
         this.message = errorCode.getMessage();
+        // "게시글 정보를 찾을 수 없습니다."
     }
 
 }
