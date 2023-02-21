@@ -50,12 +50,13 @@ public class MapController {
         return "mainMap";
     }
 
-    @PostMapping("/map/search")
-    public String getKeyword(String keyword, Model model) {
+    @PostMapping("/map")
+    @ResponseBody
+    public List<Map> getKeyword(String keyword, Model model) {
         List<Map> lists = mapService.getSearchList(keyword);
 
         model.addAttribute("list", lists);
 
-        return "mainMap;";
+        return lists;
     }
 }

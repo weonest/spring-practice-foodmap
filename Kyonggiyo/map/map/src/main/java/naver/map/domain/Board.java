@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+
 @Entity
 @Table(name = "board")
 public class Board {

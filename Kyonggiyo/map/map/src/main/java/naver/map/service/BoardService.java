@@ -114,6 +114,7 @@ public class BoardService {
 
         if (count < 1) {
             return Collections.emptyMap();
+            // 응답으로 NULL을 내려주지 않기 위해
         }
 
         //페이지네이션 정보 계산
