@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="seoulFrag">
-    <div id="seSidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav(seSide)">&times;</a>
+<th:block th:fragment="searchFrag">
+    <div id="searchNav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav(search)">&times;</a>
         <script th:inline="javascript">
+
 
             for (var i = 0; i < [[${list}]].length; i++) {
 
@@ -23,10 +24,10 @@
                 var seSidenav = document.getElementById("seSidenav");
                 seSidenav.appendChild(element);
 
-                document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${list}]][i].des + '</p>')
+                document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${list}]][i].des + '</p>');
                 document.write('<p class="smP" href="#" style="font-size: 14px">' +
                     '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
-                    '' + [[${list}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${list}]][i].sum + '</p><br>')
+                    '' + [[${list}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${list}]][i].sum + '</p><br>');
 
             }
         </script>

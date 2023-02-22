@@ -129,6 +129,7 @@
         var mySide = "mySidenav",
             suSide = "suSidenav",
             seSide = "seSidenav";
+            search = "searchNav";
             all = "all";
 
         function openNav(id) {
@@ -141,13 +142,22 @@
             }
         }
 
-        function oepnSearch() {
-            document.getElementById()
+        if ([[${list}]].length > 0) {
+            window.onload = () => {
+                openSearch();
+            }
+        }
+
+        async function openSearch() {
+            document.getElementById("searchNav").style.width = "75%";
+            document.getElementById("searchNav").style.width = "25%";
+
         }
 
         function closeNav(id) {
             document.getElementById("suSidenav").style.width = "0";
             document.getElementById("seSidenav").style.width = "0";
+            document.getElementById("searchNav").style.width = "0";
             document.getElementById(id).style.width = "0";
         }
 

@@ -51,13 +51,12 @@
   <div id="side">
     <th:block th:replace="common/sideStyles :: sideStylesFrag"/>
     <body>
-
     <!--        네비게이션 -->
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav(mySide);">&times;</a>
-      <form id="listForm" onsubmit="return false;" method="post">
-        <fieldset><input type="text" id="listWord" name = "listWord" class="form-control" placeholder="키워드를 입력해 주세요">
-          <button type="button" onclick="openSearch()" class="btn-primary"><i class="fa fa-search"></i></button></fieldset>
+      <form id="listForm" action="/map" method="post">
+        <fieldset><input type="text" id="keyword" name = "keyword" class="form-control" placeholder="키워드를 입력해 주세요">
+          <button type="submit" onclick="openSearch()" class="btn-primary"><i class="fa fa-search"></i></button></fieldset>
       </form>
 
       <a onclick="openNav(suSide)" href="#">수원캠퍼스</a>
@@ -71,6 +70,9 @@
 
     <!--        서울 리스트-->
     <th:block th:replace="fragment/seoul::seoulFrag"/>
+
+    <!--        서울 리스트-->
+    <th:block th:replace="fragment/search::searchFrag"/>
 
     <!--           별점순-->
 <!--    <th:block th:replace="fragment/starOrder::starFrag"/>-->

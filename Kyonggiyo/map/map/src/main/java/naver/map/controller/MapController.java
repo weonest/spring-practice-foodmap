@@ -50,13 +50,24 @@ public class MapController {
         return "mainMap";
     }
 
+
+
     @PostMapping("/map")
-    @ResponseBody
-    public List<Map> getKeyword(String keyword, Model model) {
+    public String getKeyword(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         List<Map> lists = mapService.getSearchList(keyword);
+
+        List<Map> maps = mapService.findMaps();
+        List<Map> suwons = mapService.findSuwon();
+        List<Map> seouls = mapService.findSeoul();
+
+        model.addAttribute("maps", maps);
+        model.addAttribute("suwons", suwons);
+        model.addAttribute("seouls", seouls);
 
         model.addAttribute("list", lists);
 
-        return lists;
+        System.out.println("lists = " + lists);
+
+        return "mainMap";
     }
 }
