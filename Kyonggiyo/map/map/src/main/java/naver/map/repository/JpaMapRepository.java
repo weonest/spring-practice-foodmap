@@ -89,10 +89,15 @@ public class JpaMapRepository implements MapRepository {
 
     @Override
     public List<Map> getSearch(String keyword) {
-        return em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword ", Map.class)
+        return em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword order by m.star DESC", Map.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
 
+
+//        List<Map> result = em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword order by m.star DESC", Map.class)
+//                .setParameter("keyword", "%" + keyword + "%")
+//                .getResultList();
+//        return result.stream().findAny();
     }
 
 

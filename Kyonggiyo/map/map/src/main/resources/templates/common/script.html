@@ -137,20 +137,24 @@
             document.getElementById(id).style.width = "75%";
             document.getElementById(id).style.height = "25%";
             } else {
-                document.getElementById(id).style.width = "35%";
+                document.getElementById(id).style.width = "55%";
                 document.getElementById(id).style.height = "25%";
             }
         }
+        var flag = true;
+        if ([[${list}]] == null) {
+            flag = false;
+        }
 
-        if ([[${list}]].length > 0) {
+        if (flag) {
             window.onload = () => {
                 openSearch();
-            }
+            };
         }
 
         async function openSearch() {
             document.getElementById("searchNav").style.width = "75%";
-            document.getElementById("searchNav").style.width = "25%";
+            document.getElementById("searchNav").style.height = "25%";
 
         }
 
@@ -165,13 +169,12 @@
             alert("별점순 사이트로 이동합니다.")
         }
 
-        function goTop() {
-            window.scrollTo(0, 0);
-        }
-
         for (var i = 0, ii = ListArr.length; i < ii; i++) {
             document.getElementById(ListArr[i]).addEventListener('click', ListHandler(i));
         }
+
+
+
 
         function ListHandler(seq) {
             return function (e) {

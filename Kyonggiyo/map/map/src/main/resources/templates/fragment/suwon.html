@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="suwonFrag">
-<div id="suSidenav" class="sidenav" ondblclick="goTop()">
+<div id="suSidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav(suSide)">&times;</a>
     <script th:inline="javascript">
         var cnt = 0;
         var ListArr = [];
+        var suSidenav = document.getElementById("suSidenav");
+
         for (var i = 0; i < [[${suwons}]].length; i++) {
 
             var element = document.createElement("a");
             element.style.fontSize = "20px";
             element.href = "#";
-            element.id = "list" + cnt++;
+            element.id = [[${suwons}]][i].name;
             ListArr.push(element.id);
             element.text = [[${suwons}]][i].name;
+
+            console.log(ListArr[i]);
 
             var img = document.createElement("img");
             img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
@@ -21,7 +25,6 @@
             img.setAttribute("height", "16");
             element.prepend(img);
 
-            var suSidenav = document.getElementById("suSidenav");
             suSidenav.appendChild(element);
 
             document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${suwons}]][i].des + '</p>')

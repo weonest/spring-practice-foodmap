@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MapController {
@@ -21,7 +22,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @RequestMapping("/map")
+    @RequestMapping(value = "/map")
     public String list(Model model) {
         List<Map> maps = mapService.findMaps();
         List<Map> suwons = mapService.findSuwon();
@@ -54,16 +55,15 @@ public class MapController {
 
     @PostMapping("/map")
     public String getKeyword(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        List<Map> lists = mapService.getSearchList(keyword);
 
         List<Map> maps = mapService.findMaps();
         List<Map> suwons = mapService.findSuwon();
         List<Map> seouls = mapService.findSeoul();
+        List<Map> lists = mapService.getSearchList(keyword);
 
         model.addAttribute("maps", maps);
         model.addAttribute("suwons", suwons);
         model.addAttribute("seouls", seouls);
-
         model.addAttribute("list", lists);
 
         System.out.println("lists = " + lists);

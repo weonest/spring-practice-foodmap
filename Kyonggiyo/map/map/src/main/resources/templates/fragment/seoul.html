@@ -5,12 +5,13 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav(seSide)">&times;</a>
         <script th:inline="javascript">
 
+            var seSidenav = document.getElementById("seSidenav");
             for (var i = 0; i < [[${seouls}]].length; i++) {
 
                 var element = document.createElement("a");
                 element.style.fontSize = "20px";
                 element.href = "#";
-                element.id = "list" + cnt++;
+                element.id = [[${seouls}]][i].name;
                 ListArr.push(element.id);
                 element.text = [[${seouls}]][i].name;
 
@@ -20,7 +21,6 @@
                 img.setAttribute("height", "16");
                 element.prepend(img);
 
-                var seSidenav = document.getElementById("seSidenav");
                 seSidenav.appendChild(element);
 
                 document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${seouls}]][i].des + '</p>')
