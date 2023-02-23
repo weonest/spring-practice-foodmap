@@ -9,35 +9,16 @@
             for (var i = 0; i < ListArr.length; i++) {
                 for (var j = 0; j < [[${list}]].length; j++) {
                     if (ListArr[i] == [[${list}]][j].name) {
-                        // var clone = document.getElementById(ListArr[i]).cloneNode(true);
+
                         searchNav.append(document.getElementById(ListArr[i]));
+                        document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${list}]][j].des + '</p>')
+                        document.write('<p class="smP" href="#" style="font-size: 14px">' +
+                            '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
+                            '' + [[${list}]][j].star + "&nbsp;&nbsp;&nbsp;" + [[${list}]][j].sum + '</p><br>')
                     }
                 }
             }
 
-                // var element = document.createElement("a");
-                // element.style.fontSize = "20px";
-                // element.href = "#";
-                // element.id = "list" + cnt++;
-                // ListArr.push(element.id);
-                // element.text = [[${list}]][i].name;
-                //
-                // var img = document.createElement("img");
-                // img.setAttribute("src", "https://cdn-icons-png.flaticon.com/128/2276/2276931.png");
-                // img.setAttribute("width", "16");
-                // img.setAttribute("height", "16");
-                // element.prepend(img);
-                //
-                //
-
-                // searchNav.appendChild(element);
-                //
-                // document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${list}]][i].des + '</p>');
-                // document.write('<p class="smP" href="#" style="font-size: 14px">' +
-                //     '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
-                //     '' + [[${list}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${list}]][i].sum + '</p><br>');
-
-            // }
         </script>
     </div>
 </th:block>
