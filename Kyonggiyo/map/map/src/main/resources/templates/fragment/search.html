@@ -10,7 +10,10 @@
                 for (var j = 0; j < [[${list}]].length; j++) {
                     if (ListArr[i] == [[${list}]][j].name) {
 
-                        searchNav.append(document.getElementById(ListArr[i]));
+                        var element = document.getElementById(ListArr[i]);
+                        var clone = element.cloneNode(true);
+
+                        searchNav.append(clone);
                         document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${list}]][j].des + '</p>')
                         document.write('<p class="smP" href="#" style="font-size: 14px">' +
                             '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
