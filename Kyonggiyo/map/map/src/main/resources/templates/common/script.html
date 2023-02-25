@@ -135,10 +135,10 @@
         function openNav(id) {
             if (id === suSide || id === seSide) {
             document.getElementById(id).style.width = "75%";
-            document.getElementById(id).style.height = "25%";
+            document.getElementById(id).style.height = "29%";
             } else {
                 document.getElementById(id).style.width = "55%";
-                document.getElementById(id).style.height = "25%";
+                document.getElementById(id).style.height = "29%";
             }
         }
         var flag = true;
@@ -152,9 +152,10 @@
             };
         }
 
+
         async function openSearch() {
             document.getElementById("searchNav").style.width = "75%";
-            document.getElementById("searchNav").style.height = "25%";
+            document.getElementById("searchNav").style.height = "29%";
 
         }
 
@@ -171,6 +172,13 @@
 
         for (var i = 0, ii = ListArr.length; i < ii; i++) {
             document.getElementById(ListArr[i]).addEventListener('click', ListHandler(i));
+            for (var j = 0; j < searchList.length; j++) {
+                if (ListArr[i] == [[${list}]][j].name) {
+                    document.getElementById(searchList[j].addEventListener('click', ListHandler(i)));
+
+                }
+            }
+
         }
 
 
