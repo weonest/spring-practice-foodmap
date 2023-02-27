@@ -74,7 +74,7 @@ public class JpaMapRepository implements MapRepository {
 //    오름차순 정렬
     @Override
     public List<Map> getOrder() {
-        return em.createQuery("select m from Map m ORDER BY m.star DESC ", Map.class)
+        return em.createQuery("select m from Map m ORDER BY m.star DESC, m.id ASC", Map.class)
                 .getResultList();
     }
 

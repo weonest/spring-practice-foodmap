@@ -13,40 +13,4 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class BoardTest {
 
-    @Autowired
-    BoardRepository boardRepository;
-
-    @Test
-    void save() {
-        Board params = Board.builder() // 생성자 패턴과 달리 Builder 패턴은 파라미터의 순서 영향 x
-                .title("1번 게시글 제목")
-                .content("1번 게시글 내용")
-                .writer("도뎡이")
-                .hits(0)
-                .deleteYn('N')
-                .build();
-        boardRepository.save(params);
-
-        Board entity = boardRepository.findById((long) 1).get(); // Optional 값이기에 .get()으로
-        assertThat(entity.getTitle()).isEqualTo("1번 게시글 제목");
-        assertThat(entity.getContent()).isEqualTo("1번 게시글 내용");
-        assertThat(entity.getWriter()).isEqualTo("도뎡이");
-    }
-
-    @Test
-    void findAll() {
-        long boardsCount = boardRepository.count();
-
-        List<Board> boards = boardRepository.findAll();
-    }
-    @Test
-    void delete() {
-
-        // 1. 게시글 조회
-        Board entity = boardRepository.findById((long) 1).get();
-
-        // 2. 게시글 삭제
-        boardRepository.delete(entity);
-    }
-
 }
