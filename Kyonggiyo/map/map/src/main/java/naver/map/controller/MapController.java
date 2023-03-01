@@ -22,38 +22,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @RequestMapping(value = "/map")
-    public String list(Model model) {
-        List<Map> maps = mapService.findMaps();
-        List<Map> suwons = mapService.findSuwon();
-        List<Map> seouls = mapService.findSeoul();
-
-        model.addAttribute("maps", maps);
-        model.addAttribute("suwons", suwons);
-        model.addAttribute("seouls", seouls);
-
-        System.out.println(maps.toString());
-        return "mainMap";
-
-    }
-
-    @RequestMapping("/map/star")
-    public String getStar(Model model) {
-
-        List<Map> stars = mapService.starOrder();
-        List<Map> suwons = mapService.starOrderSuwon();
-        List<Map> seouls = mapService.starOrderSeoul();
-
-        model.addAttribute("maps", stars);
-        model.addAttribute("suwons", suwons);
-        model.addAttribute("seouls", seouls);
-
-        return "mainMap";
-    }
-
-
-
-    @PostMapping("/map")
+    @GetMapping("/map")
     public String getKeyword(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
 
         List<Map> maps = mapService.findMaps();
@@ -70,4 +39,19 @@ public class MapController {
 
         return "mainMap";
     }
+
+    @RequestMapping("/map/star")
+    public String getStar(Model model) {
+
+        List<Map> stars = mapService.starOrder();
+        List<Map> suwons = mapService.starOrderSuwon();
+        List<Map> seouls = mapService.starOrderSeoul();
+
+        model.addAttribute("maps", stars);
+        model.addAttribute("suwons", suwons);
+        model.addAttribute("seouls", seouls);
+
+        return "mainMap";
+    }
+
 }
