@@ -16,7 +16,6 @@ public class BoardPageController {
         return "board/list";
     }
 
-    //required 뭔지?
     @GetMapping("/write")
     public String openBoardWrite(@RequestParam(required = false) final Long id, Model model) {
         model.addAttribute("id", id);

@@ -43,11 +43,11 @@ public class MapController {
     @RequestMapping("/map/star")
     public String getStar(Model model) {
 
-        List<Map> stars = mapService.starOrder();
+        List<Map> maps = mapService.starOrder();
         List<Map> suwons = mapService.starOrderSuwon();
         List<Map> seouls = mapService.starOrderSeoul();
 
-        model.addAttribute("maps", stars);
+        model.addAttribute("maps", maps);
         model.addAttribute("suwons", suwons);
         model.addAttribute("seouls", seouls);
 

@@ -21,25 +21,24 @@ public class MapService {
     public List<Map> findMaps() {
         return mapRepository.findAll();
     }
-
     public List<Map> findSuwon() {
-        return mapRepository.getCampus(0);
+        return mapRepository.findByCampus(0);
     }
     public List<Map> findSeoul() {
-        return mapRepository.getCampus(1);
+        return mapRepository.findByCampus(1);
     }
 
     public List<Map> starOrder() {
         return mapRepository.getOrder();
     }
     public List<Map> starOrderSuwon() {
-        return mapRepository.getOrderCamp(0);
+        return mapRepository.getOrderByCamp(0);
     }
     public List<Map> starOrderSeoul() {
-        return mapRepository.getOrderCamp(1);
+        return mapRepository.getOrderByCamp(1);
     }
 
     public List<Map> getSearchList(String keyword){
-        return mapRepository.getSearch(keyword);
+        return mapRepository.getBySearch(keyword);
     }
 }

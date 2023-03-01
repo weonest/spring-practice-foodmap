@@ -21,44 +21,9 @@ public class JpaMapRepository implements MapRepository {
         return map;
     }
 
-    @Override
-    public Optional<Map> findByName(String name) {
-        List<Map> result = em.createQuery("select m from Map m where m.name = :name", Map.class)
-                .setParameter("name", name)
-                .getResultList();
-
-        return result.stream().findAny();
-    }
 
     @Override
-    public Optional<Map> findByDes(String des) {
-        List<Map> result = em.createQuery("select m from Map m where m.des = :des", Map.class)
-                .setParameter("des", des)
-                .getResultList();
-
-        return result.stream().findAny();
-    }
-
-    @Override
-    public Optional<Map> findBySum(String sum) {
-        List<Map> result = em.createQuery("select m from Map m where m.sum = :sum", Map.class)
-                .setParameter("sum", sum)
-                .getResultList();
-
-        return result.stream().findAny();
-    }
-
-    @Override
-    public Optional<Map> findByCamp(long camp) {
-        List<Map> result = em.createQuery("select m from Map m where m.camp = :camp", Map.class)
-                .setParameter("camp", camp)
-                .getResultList();
-
-        return result.stream().findAny();
-    }
-
-    @Override
-    public List<Map> getCampus(long camp) {
+    public List<Map> findByCampus(int camp) {
         return em.createQuery("select m from Map m where m.camp = :camp")
                 .setParameter("camp", camp)
                 .getResultList();
@@ -79,7 +44,7 @@ public class JpaMapRepository implements MapRepository {
     }
 
     @Override
-    public List<Map> getOrderCamp(long camp) {
+    public List<Map> getOrderByCamp(int camp) {
         return em.createQuery("select m from Map m where m.camp =:camp ORDER BY m.star DESC, m.id ASC ", Map.class)
                 .setParameter("camp", camp)
                 .getResultList();
@@ -88,7 +53,7 @@ public class JpaMapRepository implements MapRepository {
     // name, des, sum
 
     @Override
-    public List<Map> getSearch(String keyword) {
+    public List<Map> getBySearch(String keyword) {
         return em.createQuery("select m from Map m where m.name like :keyword or m.des like :keyword or m.sum like :keyword", Map.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();

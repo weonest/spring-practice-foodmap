@@ -32,7 +32,7 @@ public class Map {
     private String des;
     private double star;
     private String sum;
-    private long camp;
+    private int camp;
 
     public String getName() {
         return name;
@@ -82,11 +82,11 @@ public class Map {
         this.sum = sum;
     }
 
-    public Long getCamp() {
+    public int getCamp() {
         return camp;
     }
 
-    public void setCamp(Long camp) {
+    public void setCamp(int camp) {
         this.camp = camp;
     }
 }

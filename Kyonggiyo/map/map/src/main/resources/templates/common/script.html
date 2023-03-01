@@ -141,8 +141,12 @@
                 document.getElementById(id).style.height = "29%";
             }
         }
+        var flag = true;
+        if ([[${list}]] == null || [[${list}]].length == 0) {
+            flag = false;
+        }
 
-        if ([[${list}]].length != 0) {
+        if (flag) {
             window.onload = () => {
                 openSearch();
             };
