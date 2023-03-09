@@ -1,137 +1,111 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="boardLayout"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+<!doctype html>
 
-<th:block layout:fragment="content">
-    <div class="card-content">
-        <form class="form-horizontal form-view">
-            <div class="form-group">
-                <label for="inp-type-1" class="col-sm-2 control-label">제목</label>
-                <div class="col-sm-10"><p id="title" class="form-control"></p></div>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragment/common::head('Hello, Spring boot!')">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Custom styles for this template -->
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragment/common::menu('board')">
+
+
+</nav>
+
+<div class="container">
+    <form action="#" th:action="@{/board/write}" th:object="${board}" method="post">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" th:disabled="${#authentication.name} != *{user.username}"
+                   th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' : ''"
+                   id="title" th:field="*{title}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}"
+                 th:errors="*{title}">
+                제목 에러 메시지
             </div>
-
-            <div class="form-group">
-                <label for="inp-type-2" class="col-sm-2 control-label">이름</label>
-                <div class="col-sm-10"><p id="writer" class="form-control"></p></div>
-            </div>
-
-            <div class="form-group">
-                <label for="inp-type-5" class="col-sm-2 control-label">내용</label>
-                <div class="col-sm-10"><p id="content" class="form-control"></p></div>
-            </div>
-
-            <div class="form-group">
-                <label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
-                <div class="col-sm-10"><p id="createdDate" class="form-control"></p></div>
-            </div>
-
-            <div class="form-group">
-                <label for="inp-type-5" class="col-sm-2 control-label">조회 수</label>
-                <div class="col-sm-10"><p id="hits" class="form-control"></p></div>
-            </div>
-        </form>
-
-        <div class="btn_wrap text-center">
-            <a href="javascript: void(0);" onclick="goList();" class="btn btn-default waves-effect waves-light">뒤로가기</a>
-            <a href="javascript: void(0);" onclick="goWrite();" class="btn btn-primary waves-effect waves-light">수정하기</a>
-            <button type="button" onclick="deleteBoard();" class="btn btn-danger waves-effect waves-light">삭제하기</button>
         </div>
-    </div>
-    <!-- /.card-content -->
-</th:block>
+        <div class="form-group">
+            <label for="content" class="form-label">내용</label>
+            <textarea style="overflow: hidden" onkeydown="resize(this)" class="form-control"
+                      th:disabled="${#authentication.name} != *{user.username}"
+                      th:classappend="${#fields.hasErrors('content')} ? 'is-invalid' : ''"
+                      id="content" th:field="*{content}"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}"
+                 th:errors="*{content}">
+                내용 에러 메시지
+            </div>
+        </div>
 
-<th:block layout:fragment="script">
-    <script th:inline="javascript">
-        /*<![CDATA[*/
+<!--        <div class="form-group">-->
+<!--            <label for="password" class="form-label" sec:authorize="hasRole('ROLE_GUEST')">비밀번호</label>-->
+<!--            <input type="password" class="form-control"-->
+<!--                   th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"-->
+<!--                   id="password" th:field="*{password}" sec:authorize="hasRole('ROLE_GUEST')">-->
+<!--            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"-->
+<!--                 th:errors="*{password}">-->
+<!--                암호 에러 메시지-->
+<!--            </div>-->
+<!--        </div>-->
 
-        window.onload = () => {
-            findBoard();
+
+        <div class="text-end my-2">
+            <a class="btn btn-primary" th:href="@{/board/list}">뒤로</a>
+            <span th:if="${#authentication.name} == *{user.username} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button type="button" class="btn btn-danger" th:onclick="|deleteBoard(*{id})|">삭제</button>
+                <button type="button" class="btn btn-warning" th:onclick="|update(*{id})|">수정</button>
+            </span>
+            <!--            <button type="submit" class="btn btn-primary">확인</button>-->
+        </div>
+    </form>
+
+</div>
+
+</main><!-- /.container -->
+
+<script>
+    function resize(obj) {
+        obj.style.height = '1px';
+        obj.style.height = (12 + obj.scrollHeight) + 'px';
+    }
+
+    function deleteBoard(id) {
+        //DELETE /api/boards/{id}
+        if (!confirm(`게시글을 삭제하시겠습니까?`)) {
+            return false;
         }
+        $.ajax({
+            url: '/api/boards/' + id,
+            type: 'DELETE',
 
-        /**
-         * 상세페이지 구현 게시글 조회
-         */
-        function findBoard() {
+            success: function (result) {
+                console.log("result", result);
+                alert("삭제 완료");
+                window.location.href = '/board/list';
+            },
+        });
+    }
+    function update(id) {
+        //PUT /api/boards/{id}
 
-            const id = /*[[ ${id} ]]*/;
-
-            if (!id) {
-                return false;
-            }
-
-            fetch(`/api/boards/${id}`).then(response => {
-                if (!response.ok) {
-                    throw new Error('Request failed...');
-                }
-                return response.json();
-
-            }).then(json => {
-                console.table(json);
-                json.createdDate = moment(json.createdDate).format('YYYY-MM-DD HH:mm:ss');
-
-                Object.keys(json).forEach(key => {
-                    const elem = document.getElementById(key);
-                    if (elem) {
-                        elem.innerText = json[key];
-                    }
-                    /**
-                     * 반복문 안 쓰면
-                     * const form = document.getElementById('form');
-                     *            form.title.value = json.title;
-                     *            form.content.value = json.content;
-                     *            form.writer.value = json.writer;
-                     */
-                });
-
-            }).catch(error => {
-                alert('게시글 정보를 찾을 수 없습니다.');
-                goList();
-            });
+        var data = {
+            "title": $("#title").val().trim(),
+            "content": $("#content").val().trim()
         }
+        $.ajax({
+            url: '/api/boards/' + id,
+            type: 'PATCH',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
 
-        /**
-         * 뒤로가기
-         */
-        function goList() {
-            location.href = '/board/list' + location.search;
-        }
+            success: function (result) {
+                console.log("result", result);
+                alert("수정 완료");
+                window.location.href = '/board/list';
+            },
+        });
+    }
 
-        /**
-         * 수정하기
-         */
-        function goWrite() {
-            location.href = `/board/write` + location.search + `&id=[[ ${id} ]]`;
-        }
-
-        /**
-         * 삭제하기
-         */
-        function deleteBoard() {
-
-            const id = [[ ${id} ]];
-
-            if ( !confirm(`${id}번 게시글을 삭제할까요?`) ) {
-                return false;
-            }
-
-            fetch(`/api/boards/${id}`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error('Request failed...');
-                }
-
-                alert('삭제되었습니다.');
-                goList();
-
-            }).catch(error => {
-                alert('오류가 발생하였습니다.');
-            });
-        }
-
-        /*]]>*/
-    </script>
-</th:block>
+</script>
+<footer th:replace="fragment/common::footer"></footer>
+</body>
 </html>

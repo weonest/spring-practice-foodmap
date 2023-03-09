@@ -11,7 +11,7 @@
         for (var i = 0; i < [[${suwons}]].length; i++) {
 
             var element = document.createElement("a");
-            element.style.fontSize = "20px";
+            element.style.fontSize = "1.5em";
             element.href = "javascript:;";
             element.id = [[${suwons}]][i].name;
             ListArr.push(element.id);
@@ -25,8 +25,8 @@
 
             suSidenav.appendChild(element);
 
-            document.write('<p class="smP" href="#" style="font-size: 16px">' + [[${suwons}]][i].des + '</p>')
-            document.write('<p class="smP" href="#" style="font-size: 14px">' +
+            document.write('<p class="smP" href="#" style="font-size: 1em">' + [[${suwons}]][i].des + '</p>')
+            document.write('<p class="smP" href="#" style="font-size: 1em">' +
                 '<img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" width="14">' +
                 '' + [[${suwons}]][i].star + "&nbsp;&nbsp;&nbsp;" + [[${suwons}]][i].sum + '</p><br>')
 

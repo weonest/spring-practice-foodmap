@@ -1,50 +1,47 @@
 package naver.map.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 
 @Entity
 @Table(name = "board")
-public class Board {
 
+public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // PK
+    private Long id;
 
-    private String title; // 제목
+    @NotNull
+    @Size(min = 2, max = 30, message = "제목은 2자 이상 30자 이하입니다.")
+    private String title;
+    private String content;
+    private int hits;
+    private String password;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
-    private String content; // 내용
-
-    private String writer; // 작성자
-
-    private int hits; // 조회 수
-
-    private char deleteYn; // 삭제 여부
-
-    private LocalDateTime createdDate = LocalDateTime.now(); // 생성일
-
-    private LocalDateTime modifiedDate; // 수정일
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Builder
-    public Board(String title, String content, String writer, int hits, char deleteYn) {
+    public Board(String title, String content, User user) {
         this.title = title;
         this.content = content;
-        this.writer = writer;
-        this.hits = hits;
-        this.deleteYn = deleteYn;
+        this.user = user;
     }
 
-    //게시글 수정 기능 추가
-    public void update(String title, String content, String writer) {
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.writer = writer;
-        this.modifiedDate = LocalDateTime.now(); // 작성 시간
     }
 
     //조회수 증가
@@ -52,9 +49,5 @@ public class Board {
         this.hits++;
     }
 
-    //게시글 삭제
-    public void delete() {
-        this.deleteYn = 'Y';
-    }
 
 }
