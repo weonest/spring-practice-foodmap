@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfig {
 
     private final String[] whitelist = {
-            "/", "/account/register","/static/css/**", "/api/**",
+            "/", "/account/register","/css/**", "/api/**",
             "/map"
     };
 
