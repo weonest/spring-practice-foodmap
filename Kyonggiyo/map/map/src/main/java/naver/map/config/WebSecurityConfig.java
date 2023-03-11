@@ -18,7 +18,7 @@ public class WebSecurityConfig {
 
     private final String[] whitelist = {
             "/", "/account/register","/css/**", "/api/**",
-            "/map"
+            "/map", "/map/star"
     };
 
     @Autowired

@@ -28,7 +28,7 @@ public class Board {
     private String password;
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
