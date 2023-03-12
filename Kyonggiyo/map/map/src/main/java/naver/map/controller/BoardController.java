@@ -83,7 +83,7 @@ public class BoardController {
         boardService.validate(board, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "/board/write";
+            return "board/write";
         }
 
         boardService.save(board);
