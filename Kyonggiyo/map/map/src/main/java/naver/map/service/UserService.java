@@ -20,7 +20,7 @@ public class UserService {
     public User save(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        user.setEnabled(true);
+        user.setEnabled(true); // 추후 계정 비활성화 여부
         Role role = new Role();
         role.setId(1L);
         user.getRoles().add(role);
