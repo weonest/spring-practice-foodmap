@@ -14,18 +14,13 @@ import java.util.Optional;
 public class MapController {
 
 
-    private final MapService mapService;
-
-
     @Autowired
-    public MapController(MapService mapService) {
-        this.mapService = mapService;
-    }
+    private MapService mapService;
 
     @GetMapping("/map")
     public String getKeyword(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
 
-        List<Map> maps = mapService.findMaps();
+        List<Map> maps = mapService.findMap();
         List<Map> suwons = mapService.findSuwon();
         List<Map> seouls = mapService.findSeoul();
         List<Map> lists = mapService.getSearchList(keyword);

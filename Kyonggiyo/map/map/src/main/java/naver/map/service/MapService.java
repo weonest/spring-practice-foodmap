@@ -4,41 +4,43 @@ import naver.map.domain.Map;
 import naver.map.repository.MapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
+@Service
 public class MapService {
-    private final MapRepository mapRepository;
 
     @Autowired
-    public MapService(MapRepository mapRepository) {
-        this.mapRepository = mapRepository;
-    }
+    private MapRepository mapRepository;
+//    public MapService(MapRepository mapRepository) {
+//        this.mapRepository = mapRepository;
+//    }
 
-    public List<Map> findMaps() {
+    public List<Map> findMap() {
         return mapRepository.findAll();
     }
     public List<Map> findSuwon() {
-        return mapRepository.findByCampus(0);
+        return mapRepository.findByCamp(0);
     }
     public List<Map> findSeoul() {
-        return mapRepository.findByCampus(1);
+        return mapRepository.findByCamp(1);
     }
 
     public List<Map> starOrder() {
-        return mapRepository.getOrder();
+        return mapRepository.findAllByOrder();
     }
     public List<Map> starOrderSuwon() {
-        return mapRepository.getOrderByCamp(0);
+        return mapRepository.findWithCampOrder(0);
     }
     public List<Map> starOrderSeoul() {
-        return mapRepository.getOrderByCamp(1);
+        return mapRepository.findWithCampOrder(1);
     }
 
     public List<Map> getSearchList(String keyword){
-        return mapRepository.getBySearch(keyword);
+        return mapRepository.findByNameContainingOrDesContainingOrSumContaining(keyword, keyword, keyword);
     }
 }
