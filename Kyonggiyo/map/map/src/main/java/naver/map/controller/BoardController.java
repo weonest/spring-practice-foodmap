@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -73,20 +74,20 @@ public class BoardController {
      * 글 작성
      */
     @PostMapping("/write")
-    public String write(Model model, @ModelAttribute("board") @Valid BoardRequestDto board,
+    public String write(Model model, @ModelAttribute("board") @Validated BoardRequestDto param,
                         BindingResult bindingResult, Authentication authentication) {
 
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         model.addAttribute("user", user);
 
-        boardService.validate(board, bindingResult);
+        boardService.validate(param, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "board/write";
         }
 
-        boardService.save(board);
+        boardService.save(param);
         return "redirect:/board/list"; // 다시 조회를 일으키며 불러온다
     }
 
