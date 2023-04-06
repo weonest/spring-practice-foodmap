@@ -4,6 +4,7 @@ import naver.map.domain.User;
 import naver.map.dto.BoardRequestDto;
 import naver.map.dto.BoardResponseDto;
 import naver.map.repository.UserRepository;
+import naver.map.repository.UserRepositoryImpl;
 import naver.map.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,9 @@ public class BoardController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserRepositoryImpl userRepositoryImpl;
 
     @Autowired
     private BoardService boardService;
@@ -66,7 +70,8 @@ public class BoardController {
     public String write(Model model, BoardRequestDto param, Authentication authentication) {
 
         String username = authentication.getName();
-        User user = userRepository.findByUsername(username);
+//        User user = userRepository.findByUsername(username);
+        User user = userRepositoryImpl.findByUsername(username);
         model.addAttribute("user", user);
         model.addAttribute("board", param);
         return "board/write";

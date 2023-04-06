@@ -28,4 +28,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         return list;
     }
 
+    public User findByUsername(String username) {
+        User result = queryFactory
+                .selectFrom(user)
+                .where(user.username.eq(username))
+                .fetchOne();
+        return result;
+    }
+
 }
