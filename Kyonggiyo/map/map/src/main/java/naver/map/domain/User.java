@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,13 @@ public class User {
     @Size(min = 3, max = 20)
     private String username;
 
-    @Size(min = 4, max = 20)
+    @Size(min = 3, max = 20)
+    private String nickname;
+
+    @Email
+    private String email;
+
+    @Size(min = 4)
     private String password;
 
     private Boolean enabled;
@@ -39,8 +46,10 @@ public class User {
     private List<Board> boards = new ArrayList<>();
 
     @Builder
-    public User(String username, String password) {
+    public User(String username, String password, String email, String nickname) {
         this.username = username;
+        this.nickname = nickname;
+        this.email = email;
         this.password = password;
     }
 

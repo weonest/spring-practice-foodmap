@@ -21,26 +21,41 @@
          height="57"></a>
     <h1 class="h3 mb-3 fw-normal">회원가입</h1>
 
-<!--    <div th:if="${param.error}" class="alert alert-danger" role="alert">-->
-<!--        Invalid username and password.-->
-<!--    </div>-->
-<!--    <div th:if="${param.logout}" class="alert alert-danger" role="alert">-->
-<!--        You have been logged out.-->
-<!--    </div>-->
-
 
     <div class="form-floating">
         <input type="text" class="form-control" id="username" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid':''"
                th:field ="*{username}" placeholder="name@example.com">
-        <label for="username">Username</label>
+        <label for="username">ID</label>
         <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}"
              th:errors="*{username}">
         </div>
     </div>
 
     <div class="form-floating">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <input type="text" class="form-control" id="nickname" th:classappend="${#fields.hasErrors('nickname')} ? 'is-invalid':''"
+               th:field ="*{nickname}" placeholder="Nickname">
+        <label for="username">Nickname</label>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('nickname')}"
+             th:errors="*{nickname}">
+        </div>
+    </div>
+
+    <div class="form-floating">
+        <input type="email" class="form-control" id="email" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid':''"
+               th:field ="*{email}" placeholder="Email">
+        <label for="username">Email</label>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
+             th:errors="*{email}">
+        </div>
+    </div>
+
+    <div class="form-floating">
+        <input type="password" class="form-control" id="password" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid':''"
+               name="password" placeholder="Password">
         <label for="password">Password</label>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
+             th:errors="*{password}">
+        </div>
     </div>
 
 
