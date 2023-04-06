@@ -50,9 +50,11 @@ public class BoardController {
     /**
      * 상세 보기
      */
-    @GetMapping("/view/{id}")
-    public String view(Model model, @PathVariable final Long id) {
+    @GetMapping("/view/{id}/{page}")
+    public String view(Model model, @PathVariable final Long id,
+                       @PathVariable final Long page) {
         BoardResponseDto board = boardService.findById(id);
+        model.addAttribute("page", page);
         model.addAttribute("board", board);
         return "board/view";
     }
@@ -86,7 +88,6 @@ public class BoardController {
         if (bindingResult.hasErrors()) {
             return "board/write";
         }
-
         boardService.save(param);
         return "redirect:/board/list"; // 다시 조회를 일으키며 불러온다
     }

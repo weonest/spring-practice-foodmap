@@ -37,7 +37,7 @@
         </div>
 
         <div class="text-end my-2">
-            <a class="btn btn-primary" th:href="@{/board/list}">뒤로</a>
+            <a class="btn btn-primary" th:href="@{/board/list(page=${page}, keyword=${param.keyword})}">뒤로</a>
             <span th:if="${#authentication.name} == *{user.username} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             <button type="button" class="btn btn-danger" th:onclick="|deleteBoard(*{id})|">삭제</button>
                 <button type="button" class="btn btn-warning" th:onclick="|update(*{id})|">수정</button>
