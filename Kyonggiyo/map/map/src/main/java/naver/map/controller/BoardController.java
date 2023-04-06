@@ -37,7 +37,7 @@ public class BoardController {
     public String list(Model model, @PageableDefault(size = 10) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String keyword) {
         Page<BoardResponseDto> boards = boardService.findAll(keyword, keyword, pageable);
-        boards.getPageable().getPageNumber();
+
         int startPage = 1;
         int endPage = boards.getTotalPages();
 
