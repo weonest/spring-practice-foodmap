@@ -16,22 +16,28 @@
 
 <body class="text-center">
 
-<form class="form-signin w-100 m-auto" th:action="@{/account/register}" method="post">
+<form class="form-signin w-100 m-auto" th:action="@{/account/register}" th:object="${user}" method="post">
     <a th:href="@{/}"><img class="mb-4" src="https://cdn-icons-png.flaticon.com/128/2977/2977402.png" alt="" width="72"
          height="57"></a>
     <h1 class="h3 mb-3 fw-normal">회원가입</h1>
 
-    <div th:if="${param.error}" class="alert alert-danger" role="alert">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}" class="alert alert-danger" role="alert">
-        You have been logged out.
-    </div>
+<!--    <div th:if="${param.error}" class="alert alert-danger" role="alert">-->
+<!--        Invalid username and password.-->
+<!--    </div>-->
+<!--    <div th:if="${param.logout}" class="alert alert-danger" role="alert">-->
+<!--        You have been logged out.-->
+<!--    </div>-->
+
 
     <div class="form-floating">
-        <input type="text" class="form-control" id="username" name="username" placeholder="name@example.com">
+        <input type="text" class="form-control" id="username" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid':''"
+               th:field ="*{username}" placeholder="name@example.com">
         <label for="username">Username</label>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}"
+             th:errors="*{username}">
+        </div>
     </div>
+
     <div class="form-floating">
         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         <label for="password">Password</label>

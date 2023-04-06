@@ -14,6 +14,7 @@ public class BoardValidator implements Validator {
         return Board.class.equals(clazz);
     }
 
+
     @Override
     public void validate(Object obj, Errors errors) {
 
