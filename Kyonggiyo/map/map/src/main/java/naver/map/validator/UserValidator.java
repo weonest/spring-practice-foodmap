@@ -16,7 +16,7 @@ import java.util.List;
 public class UserValidator implements Validator {
 
     @Autowired
-    private UserRepositoryImpl userRepositoryImpl;
+    private UserRepository userRepository;
 
 
     @Override
@@ -31,13 +31,13 @@ public class UserValidator implements Validator {
         UserRequestDto u = (UserRequestDto) obj;
         if (StringUtils.length(u.getUsername()) < 3) {
             errors.rejectValue("username", "key", "ID는 3자 이상 20자 이하입니다");
-        }else if (userRepositoryImpl.findAllUsername().contains(u.getUsername())) {
+        }else if (userRepository.findAllUsername().contains(u.getUsername())) {
                 errors.rejectValue("username", "NotUnique", "이미 존재하는 ID입니다");
         }
 
         if (StringUtils.length(u.getNickname()) < 3) {
             errors.rejectValue("nickname", "key", "Nickname은 3자 이상 20자 이하입니다");
-        }else if (userRepositoryImpl.findAllNickname().contains(u.getNickname())) {
+        }else if (userRepository.findAllNickname().contains(u.getNickname())) {
                 errors.rejectValue("nickname", "NotUnique", "이미 존재하는 Nickname입니다");
         }
 

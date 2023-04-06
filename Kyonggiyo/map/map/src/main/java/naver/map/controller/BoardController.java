@@ -28,9 +28,6 @@ public class BoardController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserRepositoryImpl userRepositoryImpl;
-
-    @Autowired
     private BoardService boardService;
 
 
@@ -70,8 +67,8 @@ public class BoardController {
     public String write(Model model, BoardRequestDto param, Authentication authentication) {
 
         String username = authentication.getName();
-//        User user = userRepository.findByUsername(username);
-        User user = userRepositoryImpl.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+//        User user = userRepositoryImpl.findByUsername(username);
         model.addAttribute("user", user);
         model.addAttribute("board", param);
         return "board/write";
