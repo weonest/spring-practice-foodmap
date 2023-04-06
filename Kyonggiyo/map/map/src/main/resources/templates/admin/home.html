@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="container-fluid" id="navbarsExampleDefault">
+    <div class="container-fluid" id="navbarsExampleDefault" th:fragment="adminMenu">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" th:classappend="${menu} == 'board' ? 'active' : '' ">
                 <a class="nav-link" href="#" th:href="@{/board/list}"> 게시판 <span class="sr-only" th:if="${menu} == 'board'"></span></a>
