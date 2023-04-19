@@ -5,6 +5,7 @@ import naver.map.domain.Role;
 import naver.map.domain.User;
 import naver.map.dto.UserRequestDto;
 import naver.map.repository.UserRepository;
+import naver.map.repository.UserRepositoryImpl;
 import naver.map.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
