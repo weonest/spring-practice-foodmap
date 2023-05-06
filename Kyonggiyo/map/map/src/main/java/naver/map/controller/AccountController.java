@@ -36,7 +36,7 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") @Valid UserRequestDto param, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("user") UserRequestDto param, BindingResult bindingResult) {
 
         userService.validate(param, bindingResult);
 
