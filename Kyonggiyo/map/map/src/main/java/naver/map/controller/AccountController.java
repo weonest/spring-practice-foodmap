@@ -36,7 +36,7 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") @Validated UserRequestDto param, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("user") @Valid UserRequestDto param, BindingResult bindingResult, Model model) {
 
         userService.validate(param, bindingResult);
 
@@ -47,4 +47,18 @@ public class AccountController {
         userService.save(param);
         return "redirect:/";
     }
+
+//    @PostMapping("/register")
+//    public String register(@Valid UserRequestDto param, BindingResult bindingResult, Model model) {
+//
+//        userService.validate(param, bindingResult);
+//
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("user", param);
+//            return "account/register";
+//        }
+//
+//        userService.save(param);
+//        return "redirect:/";
+//    }
 }
