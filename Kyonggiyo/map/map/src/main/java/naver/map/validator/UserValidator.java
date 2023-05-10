@@ -19,7 +19,7 @@ public class UserValidator implements Validator {
     private UserRepository userRepository;
 
 
-    @Override
+    @Override // 해당 클래스를 validator가 지원하는지
     public boolean supports(Class<?> clazz) {
         return UserRequestDto.class.equals(clazz);
     }

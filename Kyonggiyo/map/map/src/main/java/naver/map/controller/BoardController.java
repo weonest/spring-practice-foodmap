@@ -78,7 +78,7 @@ public class BoardController {
      * 글 작성
      */
     @PostMapping("/write")
-    public String write(Model model, @ModelAttribute("board") @Valid BoardRequestDto param,
+    public String write(Model model, @ModelAttribute("board") BoardRequestDto param,
                         BindingResult bindingResult) {
 
         String username = param.getUser().getUsername();

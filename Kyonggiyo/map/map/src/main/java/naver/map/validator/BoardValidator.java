@@ -11,7 +11,7 @@ import org.thymeleaf.util.StringUtils;
 public class BoardValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-        return Board.class.equals(clazz);
+        return BoardRequestDto.class.equals(clazz);
     }
 
 
