@@ -15,5 +15,5 @@ public interface MapRepositoryCustom {
 
     List<Map> findWithCampOrder(int camp);
 
-    List<Map> findByNameContainingOrDesContainingOrSumContaining(String name, String des, String sum);
+    List<Map> findByKeyword(String keyword);
 }
