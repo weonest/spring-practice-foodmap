@@ -41,6 +41,6 @@ public class MapService {
     }
 
     public List<Map> getSearchList(String keyword){
-        return mapRepository.findByNameContainingOrDesContainingOrSumContaining(keyword, keyword, keyword);
+        return mapRepository.findByKeyword(keyword);
     }
 }
