@@ -52,8 +52,8 @@ public class MapRepositoryImpl implements MapRepositoryCustom{
 
     @Override
     public List<Map> findByKeyword(String keyword) {
-//        if (keyword == null || keyword.isEmpty())
-//            return null;
+        if (keyword == null || keyword.isEmpty())
+            return null;
 
         List<Map> maps = queryFactory
                 .selectFrom(map)
@@ -65,6 +65,7 @@ public class MapRepositoryImpl implements MapRepositoryCustom{
         return maps;
     }
 
+    // 왜 여기서 처리가 안 될까?
     private BooleanExpression nameCon(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return null;
